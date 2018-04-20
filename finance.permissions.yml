@@ -1,0 +1,73 @@
+add account entities:
+  title: 'Create new Account entities'
+
+administer account entities:
+  title: 'Administer Account entities'
+  description: 'Allow to access the administration form to configure Account entities.'
+  restrict access: true
+
+delete account entities:
+  title: 'Delete Account entities'
+
+edit account entities:
+  title: 'Edit Account entities'
+
+view account entities:
+  title: 'View Account entities'
+
+
+
+add ledger entities:
+  title: 'Create new Ledger entities'
+
+administer ledger entities:
+  title: 'Administer Ledger entities'
+  description: 'Allow to access the administration form to configure Ledger entities.'
+  restrict access: true
+
+delete ledger entities:
+  title: 'Delete Ledger entities'
+
+edit ledger entities:
+  title: 'Edit Ledger entities'
+
+view ledger entities:
+  title: 'View Ledger entities'
+
+
+
+add transfer method entities:
+  title: 'Create new Transfer method entities'
+
+administer transfer method entities:
+  title: 'Administer Transfer method entities'
+  description: 'Allow to access the administration form to configure Transfer method entities.'
+  restrict access: true
+
+delete transfer method entities:
+  title: 'Delete Transfer method entities'
+
+edit transfer method entities:
+  title: 'Edit Transfer method entities'
+
+view transfer method entities:
+  title: 'View Transfer method entities'
+
+
+
+add withdraw entities:
+  title: 'Create new Withdraw entities'
+
+administer withdraw entities:
+  title: 'Administer Withdraw entities'
+  description: 'Allow to access the administration form to configure Withdraw entities.'
+  restrict access: true
+
+delete withdraw entities:
+  title: 'Delete Withdraw entities'
+
+edit withdraw entities:
+  title: 'Edit Withdraw entities'
+
+view withdraw entities:
+  title: 'View Withdraw entities'

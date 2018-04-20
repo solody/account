@@ -1,0 +1,32 @@
+entity.finance_account.add_form:
+  route_name: entity.finance_account.add_page
+  title: 'Add Account'
+  appears_on:
+    - entity.finance_account.collection
+entity.finance_account_type.add_form:
+  route_name: entity.finance_account_type.add_form
+  title: 'Add Account type'
+  appears_on:
+    - entity.finance_account_type.collection
+
+entity.finance_ledger.add_form:
+  route_name: entity.finance_ledger.add_form
+  title: 'Add Ledger'
+  appears_on:
+    - entity.finance_ledger.collection
+entity.finance_transfer_method.add_form:
+  route_name: entity.finance_transfer_method.add_form
+  title: 'Add Transfer method'
+  appears_on:
+    - entity.finance_transfer_method.collection
+entity.finance_withdraw.add_form:
+  route_name: entity.finance_withdraw.add_form
+  title: 'Add Withdraw'
+  appears_on:
+    - entity.finance_withdraw.collection
+entity.finance_transfer_gateway.add_form:
+  route_name: entity.finance_transfer_gateway.add_form
+  title: 'Add Transfer gateway'
+  appears_on:
+    - entity.finance_transfer_gateway.collection
+

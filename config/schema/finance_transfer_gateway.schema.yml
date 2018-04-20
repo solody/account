@@ -1,0 +1,12 @@
+finance.finance_transfer_gateway.*:
+  type: config_entity
+  label: 'Transfer gateway config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

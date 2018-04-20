@@ -1,0 +1,4 @@
+services:
+  plugin.manager.transfer_gateway:
+    class: Drupal\finance\Plugin\TransferGatewayManager
+    parent: default_plugin_manager

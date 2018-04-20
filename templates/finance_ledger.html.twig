@@ -1,0 +1,22 @@
+{#
+/**
+ * @file finance_ledger.html.twig
+ * Default theme implementation to present Ledger data.
+ *
+ * This template is used when viewing Ledger pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_finance_ledger()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('finance_ledger') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

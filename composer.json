@@ -1,0 +1,16 @@
+{
+  "name": "drupal/finance",
+  "type": "drupal-module",
+  "description": "Provides finance functionality.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/finance",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/finance",
+    "source": "http://cgit.drupalcode.org/finance"
+  },
+  "require": {
+    "drupal/dynamic_entity_reference": "^1.5"
+  }
+}

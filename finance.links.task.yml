@@ -1,0 +1,84 @@
+# Account routing definition
+
+entity.finance_account.canonical:
+  route_name: entity.finance_account.canonical
+  base_route: entity.finance_account.canonical
+  title: 'View'
+
+entity.finance_account.edit_form:
+  route_name: entity.finance_account.edit_form
+  base_route: entity.finance_account.canonical
+  title: 'Edit'
+
+entity.finance_account.delete_form:
+  route_name:  entity.finance_account.delete_form
+  base_route:  entity.finance_account.canonical
+  title: Delete
+  weight: 10
+
+# Ledger routing definition
+finance_ledger.settings_tab:
+  route_name: finance_ledger.settings
+  title: 'Settings'
+  base_route: finance_ledger.settings
+
+entity.finance_ledger.canonical:
+  route_name: entity.finance_ledger.canonical
+  base_route: entity.finance_ledger.canonical
+  title: 'View'
+
+entity.finance_ledger.edit_form:
+  route_name: entity.finance_ledger.edit_form
+  base_route: entity.finance_ledger.canonical
+  title: 'Edit'
+
+entity.finance_ledger.delete_form:
+  route_name:  entity.finance_ledger.delete_form
+  base_route:  entity.finance_ledger.canonical
+  title: Delete
+  weight: 10
+
+# Transfer method routing definition
+finance_transfer_method.settings_tab:
+  route_name: finance_transfer_method.settings
+  title: 'Settings'
+  base_route: finance_transfer_method.settings
+
+entity.finance_transfer_method.canonical:
+  route_name: entity.finance_transfer_method.canonical
+  base_route: entity.finance_transfer_method.canonical
+  title: 'View'
+
+entity.finance_transfer_method.edit_form:
+  route_name: entity.finance_transfer_method.edit_form
+  base_route: entity.finance_transfer_method.canonical
+  title: 'Edit'
+
+entity.finance_transfer_method.delete_form:
+  route_name:  entity.finance_transfer_method.delete_form
+  base_route:  entity.finance_transfer_method.canonical
+  title: Delete
+  weight: 10
+
+# Withdraw routing definition
+finance_withdraw.settings_tab:
+  route_name: finance_withdraw.settings
+  title: 'Settings'
+  base_route: finance_withdraw.settings
+
+entity.finance_withdraw.canonical:
+  route_name: entity.finance_withdraw.canonical
+  base_route: entity.finance_withdraw.canonical
+  title: 'View'
+
+entity.finance_withdraw.edit_form:
+  route_name: entity.finance_withdraw.edit_form
+  base_route: entity.finance_withdraw.canonical
+  title: 'Edit'
+
+entity.finance_withdraw.delete_form:
+  route_name:  entity.finance_withdraw.delete_form
+  base_route:  entity.finance_withdraw.canonical
+  title: Delete
+  weight: 10
+

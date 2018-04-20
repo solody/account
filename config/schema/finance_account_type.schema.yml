@@ -1,0 +1,21 @@
+finance.finance_account_type.*:
+  type: config_entity
+  label: 'Account type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    withdraw_period:
+      type: integer
+      label: '提现周期'
+    minimum_withdraw:
+      type: float
+      label: '单笔最小提现限额'
+    maximum_withdraw:
+      type: float
+      label: '单笔最大提现限额'
+    uuid:
+      type: string
