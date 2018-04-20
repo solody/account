@@ -2,3 +2,6 @@ services:
   plugin.manager.transfer_gateway:
     class: Drupal\finance\Plugin\TransferGatewayManager
     parent: default_plugin_manager
+  finance.finance_manager:
+    class: Drupal\finance\FinanceManager
+    arguments: ['@entity_type.manager']
