@@ -84,6 +84,16 @@ class Ledger extends ContentEntityBase implements LedgerInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getBalance()
+    {
+        if (!$this->get('balance')->isEmpty()) {
+            return $this->get('balance')->first()->toPrice();
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function baseFieldDefinitions(EntityTypeInterface $entity_type)

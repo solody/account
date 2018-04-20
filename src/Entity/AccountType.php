@@ -76,4 +76,9 @@ class AccountType extends ConfigEntityBundleBase implements AccountTypeInterface
      * @var float
      */
     protected $maximum_withdraw;
+
+    public function getLabel()
+    {
+        return $this->label;
+    }
 }

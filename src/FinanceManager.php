@@ -2,7 +2,9 @@
 
 namespace Drupal\finance;
 
+use Drupal\commerce_price\Price;
 use Drupal\finance\Entity\Account;
+use Drupal\finance\Entity\AccountType;
 use Drupal\finance\Entity\Ledger;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\user\Entity\User;
@@ -39,12 +41,13 @@ class FinanceManager implements FinanceManagerInterface {
         if (!empty($ids)) {
             return Account::load(array_pop($ids));
         } else {
-            throw new \Exception('找不到账户');
+            return null;
         }
     }
 
     /**
      * @inheritdoc
+     * @throws \Drupal\Core\Entity\EntityStorageException
      */
     public function createLedger(
         Account $financeAccount,
@@ -54,29 +57,25 @@ class FinanceManager implements FinanceManagerInterface {
         $source = null)
     {
         // 计算余额
+        $balance = new Price('0.00', 'CNY');
         $last_ledger = $this->getLastLedger($financeAccount);
-        $balance = 0;
         if ($last_ledger) {
-            $last_ledger->get('balance')[0]->getNumber();
+            $balance = $last_ledger->getBalance();
         }
 
+        $amount_price = new Price($amount, $balance->getCurrencyCode());
+
         if ($amountType === Ledger::AMOUNT_TYPE_DEBIT) {
-            $balance = $balance + $amount;
+            $balance->add($amount_price);
         } elseif ($amountType === Ledger::AMOUNT_TYPE_CREDIT) {
-            $balance = $balance - $amount;
+            $balance->subtract($amount_price);
         }
 
         $create_data = [
-            'finance_account_id' => $financeAccount,
+            'account_id' => $financeAccount,
             'amount_type' => $amountType,
-            'amount' => [
-                'number' => $amount,
-                'currency_code' => 'CNY'
-            ],
-            'balance' => [
-                'number' => $balance,
-                'currency_code' => 'CNY'
-            ],
+            'amount' => $amount_price,
+            'balance' => $balance,
             'remarks' => $remarks
         ];
 
@@ -88,18 +87,47 @@ class FinanceManager implements FinanceManagerInterface {
         return $ledger;
     }
 
+    /**
+     * @param Account $financeAccount
+     * @return Ledger|null
+     */
     public function getLastLedger(Account $financeAccount)
     {
         /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
         $query = \Drupal::entityQuery('finance_ledger')
             ->condition('account_id', $financeAccount->id())
-            ->sort('id', 'DESC');
+            ->sort('id', 'DESC')
+            ->range(0,1);
         $ids = $query->execute();
 
         if (!empty($ids)) {
-            return Account::load(array_pop($ids));
+            return Ledger::load(array_pop($ids));
         } else {
             return null;
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createAccount(User $user, $type)
+    {
+        $account = $this->getAccount($user, $type);
+
+        if (!$account) {
+            $account_type = AccountType::load($type);
+            $price = new Price('0.00', 'CNY');
+
+            $account = Account::create([
+                'user_id' => $user,
+                'type' => $type,
+                'name' => $account_type->getLabel(),
+                'total_debit' => $price,
+                'total_credit' => $price,
+                'balance' => $price
+            ]);
+        }
+
+        return $account;
     }
 }

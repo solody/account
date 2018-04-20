@@ -12,6 +12,15 @@ use Drupal\user\Entity\User;
 interface FinanceManagerInterface {
 
     /**
+     * 创建账户，如果账户已存在，直接返回该账户
+     *
+     * @param User $user
+     * @param $type
+     * @return Account
+     */
+    public function createAccount(User $user, $type);
+
+    /**
      * 获取一个账户
      *
      * @param User $user
@@ -27,8 +36,7 @@ interface FinanceManagerInterface {
      * @param $amountType
      * @param $amount
      * @param $remarks
-     * @param $order_id
-     * @param $withdraw_id
+     * @param $source
      * @return Ledger
      */
     public function createLedger(Account $financeAccount,

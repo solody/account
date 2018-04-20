@@ -1,10 +1,16 @@
+finance.admin_root:
+  title: 'Finance'
+  route_name: 'finance.admin'
+  parent: 'system.admin'
+  weight: -10
+
 
 # Account menu items definition
 entity.finance_account.collection:
   title: 'Account list'
   route_name: entity.finance_account.collection
   description: 'List Account entities'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 100
 
 
@@ -13,7 +19,7 @@ entity.finance_account_type.collection:
   title: 'Account type'
   route_name: entity.finance_account_type.collection
   description: 'List Account type (bundles)'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 99
 
 
@@ -22,48 +28,48 @@ entity.finance_ledger.collection:
   title: 'Ledger list'
   route_name: entity.finance_ledger.collection
   description: 'List Ledger entities'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 100
 
 finance_ledger.admin.structure.settings:
   title: 'Ledger settings'
   description: 'Configure Ledger entities'
   route_name: finance_ledger.settings
-  parent: system.admin_structure
+  parent: finance.admin_root
 
 # Transfer method menu items definition
 entity.finance_transfer_method.collection:
   title: 'Transfer method list'
   route_name: entity.finance_transfer_method.collection
   description: 'List Transfer method entities'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 100
 
 finance_transfer_method.admin.structure.settings:
   title: 'Transfer method settings'
   description: 'Configure Transfer method entities'
   route_name: finance_transfer_method.settings
-  parent: system.admin_structure
+  parent: finance.admin_root
 
 # Withdraw menu items definition
 entity.finance_withdraw.collection:
   title: 'Withdraw list'
   route_name: entity.finance_withdraw.collection
   description: 'List Withdraw entities'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 100
 
 finance_withdraw.admin.structure.settings:
   title: 'Withdraw settings'
   description: 'Configure Withdraw entities'
   route_name: finance_withdraw.settings
-  parent: system.admin_structure
+  parent: finance.admin_root
 
 # Transfer gateway menu items definition
 entity.finance_transfer_gateway.collection:
   title: 'Transfer gateway'
   route_name: entity.finance_transfer_gateway.collection
   description: 'List Transfer gateway (bundles)'
-  parent: system.admin_structure
+  parent: finance.admin_root
   weight: 99
 
