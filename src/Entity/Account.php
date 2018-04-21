@@ -151,7 +151,7 @@ class Account extends ContentEntityBase implements AccountInterface
             ->setSetting('handler', 'default')
             ->setDisplayOptions('view', [
                 'label' => 'inline',
-                'type' => 'author',
+                'type' => 'entity_reference_label',
                 'weight' => 0,
             ]);
 
