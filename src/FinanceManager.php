@@ -3,6 +3,7 @@
 namespace Drupal\finance;
 
 use Drupal\commerce_price\Price;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\finance\Entity\Account;
 use Drupal\finance\Entity\AccountType;
 use Drupal\finance\Entity\Ledger;
@@ -30,7 +31,7 @@ class FinanceManager implements FinanceManagerInterface {
     /**
      * @inheritdoc
      */
-    public function getAccount(User $user, $type)
+    public function getAccount(AccountInterface $user, $type)
     {
         /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
         $query = \Drupal::entityQuery('finance_account')
@@ -52,7 +53,7 @@ class FinanceManager implements FinanceManagerInterface {
     public function createLedger(
         Account $financeAccount,
         $amountType,
-        $amount,
+        Price $amount,
         $remarks = '',
         $source = null)
     {
@@ -63,18 +64,16 @@ class FinanceManager implements FinanceManagerInterface {
             $balance = $last_ledger->getBalance();
         }
 
-        $amount_price = new Price($amount, $balance->getCurrencyCode());
-
         if ($amountType === Ledger::AMOUNT_TYPE_DEBIT) {
-            $balance->add($amount_price);
+            $balance = $balance->add($amount);
         } elseif ($amountType === Ledger::AMOUNT_TYPE_CREDIT) {
-            $balance->subtract($amount_price);
+            $balance = $balance->subtract($amount);
         }
 
         $create_data = [
             'account_id' => $financeAccount,
             'amount_type' => $amountType,
-            'amount' => $amount_price,
+            'amount' => $amount,
             'balance' => $balance,
             'remarks' => $remarks
         ];
@@ -110,7 +109,7 @@ class FinanceManager implements FinanceManagerInterface {
     /**
      * @inheritdoc
      */
-    public function createAccount(User $user, $type)
+    public function createAccount(AccountInterface $user, $type)
     {
         $account = $this->getAccount($user, $type);
 
@@ -119,7 +118,7 @@ class FinanceManager implements FinanceManagerInterface {
             $price = new Price('0.00', 'CNY');
 
             $account = Account::create([
-                'user_id' => $user,
+                'user_id' => $user->id(),
                 'type' => $type,
                 'name' => $account_type->getLabel(),
                 'total_debit' => $price,

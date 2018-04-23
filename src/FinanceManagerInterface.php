@@ -2,6 +2,8 @@
 
 namespace Drupal\finance;
 
+use Drupal\commerce_price\Price;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\finance\Entity\Account;
 use Drupal\finance\Entity\Ledger;
 use Drupal\user\Entity\User;
@@ -18,7 +20,7 @@ interface FinanceManagerInterface {
      * @param $type
      * @return Account
      */
-    public function createAccount(User $user, $type);
+    public function createAccount(AccountInterface $user, $type);
 
     /**
      * 获取一个账户
@@ -27,7 +29,7 @@ interface FinanceManagerInterface {
      * @param $type
      * @return Account
      */
-    public function getAccount(User $user, $type);
+    public function getAccount(AccountInterface $user, $type);
 
     /**
      * 增加记账记录
@@ -41,7 +43,7 @@ interface FinanceManagerInterface {
      */
     public function createLedger(Account $financeAccount,
                                  $amountType,
-                                 $amount,
+                                 Price $amount,
                                  $remarks = '',
                                  $source = null);
 }
