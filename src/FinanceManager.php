@@ -125,6 +125,8 @@ class FinanceManager implements FinanceManagerInterface {
                 'total_credit' => $price,
                 'balance' => $price
             ]);
+
+            $account->save();
         }
 
         return $account;
