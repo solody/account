@@ -10,53 +10,56 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function finance_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    // Main module help for the finance module.
-    case 'help.page.finance':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Provides finance functionality.') . '</p>';
-      return $output;
+function finance_help($route_name, RouteMatchInterface $route_match)
+{
+    switch ($route_name) {
+        // Main module help for the finance module.
+        case 'help.page.finance':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Provides finance functionality.') . '</p>';
+            return $output;
 
-    default:
-  }
+        default:
+    }
 }
 
 /**
  * Implements hook_theme().
  */
-function finance_theme() {
-  $theme = [
-      'finance' => [
-          'render element' => 'children',
-      ],
-  ];
-  $theme['finance_account'] = [
-    'render element' => 'elements',
-    'file' => 'finance_account.page.inc',
-    'template' => 'finance_account',
-  ];
-  $theme['finance_account_content_add_list'] = [
-    'render element' => 'content',
-    'variables' => ['content' => NULL],
-    'file' => 'finance_account.page.inc',
-  ];
-  return $theme;
+function finance_theme()
+{
+    $theme = [
+        'finance' => [
+            'render element' => 'children',
+        ],
+    ];
+    $theme['finance_account'] = [
+        'render element' => 'elements',
+        'file' => 'finance_account.page.inc',
+        'template' => 'finance_account',
+    ];
+    $theme['finance_account_content_add_list'] = [
+        'render element' => 'content',
+        'variables' => ['content' => NULL],
+        'file' => 'finance_account.page.inc',
+    ];
+    return $theme;
 }
 
 /**
-* Implements hook_theme_suggestions_HOOK().
-*/
-function finance_theme_suggestions_finance_account(array $variables) {
-  $suggestions = [];
-  $entity = $variables['elements']['#finance_account'];
-  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function finance_theme_suggestions_finance_account(array $variables)
+{
+    $suggestions = [];
+    $entity = $variables['elements']['#finance_account'];
+    $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
 
-  $suggestions[] = 'finance_account__' . $sanitized_view_mode;
-  $suggestions[] = 'finance_account__' . $entity->bundle();
-  $suggestions[] = 'finance_account__' . $entity->bundle() . '__' . $sanitized_view_mode;
-  $suggestions[] = 'finance_account__' . $entity->id();
-  $suggestions[] = 'finance_account__' . $entity->id() . '__' . $sanitized_view_mode;
-  return $suggestions;
+    $suggestions[] = 'finance_account__' . $sanitized_view_mode;
+    $suggestions[] = 'finance_account__' . $entity->bundle();
+    $suggestions[] = 'finance_account__' . $entity->bundle() . '__' . $sanitized_view_mode;
+    $suggestions[] = 'finance_account__' . $entity->id();
+    $suggestions[] = 'finance_account__' . $entity->id() . '__' . $sanitized_view_mode;
+    return $suggestions;
 }

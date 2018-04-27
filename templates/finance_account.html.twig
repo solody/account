@@ -16,7 +16,13 @@
  */
 #}
 <div{{ attributes.addClass('finance_account') }}>
-  {% if content %}
-    {{- content -}}
+    {% if title %}
+      <h4>{{- title -}}</h4>
+    {% endif %}
+    {% if detail_link %}
+        <div style="text-align: right;"><div class="button">{{- detail_link -}}</div></div>
+    {% endif %}
+  {% if table %}
+      {{- table -}}
   {% endif %}
 </div>
