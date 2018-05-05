@@ -1,0 +1,26 @@
+withdraw_default:
+  id: withdraw_default
+  group: finance_withdraw
+  label: 'Withdraw Default'
+  states:
+    draft:
+      label: 待审核
+    processing:
+      label: 正在处理
+    completed:
+      label: 已完成
+    canceled:
+      label: 已拒绝
+  transitions:
+    place:
+      label: '通过审核'
+      from: [draft]
+      to: processing
+    paid:
+      label: '完成打款'
+      from: [processing]
+      to: completed
+    cancel:
+      label: '拒绝申请'
+      from: [draft]
+      to:   canceled

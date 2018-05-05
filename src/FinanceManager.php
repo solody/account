@@ -8,6 +8,7 @@ use Drupal\finance\Entity\Account;
 use Drupal\finance\Entity\AccountType;
 use Drupal\finance\Entity\Ledger;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\finance\Entity\Withdraw;
 use Drupal\user\Entity\User;
 
 /**
@@ -150,5 +151,61 @@ class FinanceManager implements FinanceManagerInterface
         $this->createLedger($form, Ledger::AMOUNT_TYPE_CREDIT, $amount, '', $source);
         // 记录进账
         $this->createLedger($to, Ledger::AMOUNT_TYPE_DEBIT, $amount, '', $source);
+    }
+
+    /**
+     * 统计账户正在处理的提现总额
+     *
+     * @param Account $account
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function countPendingWithdrawTotalAmount(Account $account)
+    {
+        /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
+        $query = \Drupal::entityQuery('finance_withdraw')
+            ->condition('state', ['draft', 'processing'], 'IN')
+            ->condition('account_id', $account->id());
+        $ids = $query->execute();
+
+        $price = new Price('0.00', 'CNY');
+        if (count($ids)) {
+            $withdraws = Withdraw::loadMultiple($ids);
+
+            foreach ($withdraws as $withdraw) {
+                /** @var Withdraw $withdraw */
+                $price = $price->add($withdraw->getAmount());
+            }
+        }
+
+        return $price;
+    }
+
+    /**
+     * 统计账户已完成的提现总额
+     *
+     * @param Account $account
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function countCompleteWithdrawTotalAmount(Account $account)
+    {
+        /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
+        $query = \Drupal::entityQuery('finance_withdraw')
+            ->condition('state', 'completed')
+            ->condition('account_id', $account->id());
+        $ids = $query->execute();
+
+        $price = new Price('0.00', 'CNY');
+        if (count($ids)) {
+            $withdraws = Withdraw::loadMultiple($ids);
+
+            foreach ($withdraws as $withdraw) {
+                /** @var Withdraw $withdraw */
+                $price = $price->add($withdraw->getAmount());
+            }
+        }
+
+        return $price;
     }
 }

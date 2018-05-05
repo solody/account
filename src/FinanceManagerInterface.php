@@ -58,4 +58,20 @@ interface FinanceManagerInterface {
      * @return mixed
      */
     public function transfer(Account $form, Account $to, Price $amount, $message = '', $source = null);
+
+    /**
+     * 统计账户正在处理的提现总额
+     *
+     * @param Account $account
+     * @return Price
+     */
+    public function countPendingWithdrawTotalAmount(Account $account);
+
+    /**
+     * 统计账户已完成的提现总额
+     *
+     * @param Account $account
+     * @return Price
+     */
+    public function countCompleteWithdrawTotalAmount(Account $account);
 }

@@ -2,6 +2,7 @@
 
 namespace Drupal\finance\Entity;
 
+use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
@@ -135,6 +136,39 @@ class Account extends ContentEntityBase implements AccountInterface
     {
         $this->set('user_id', $account->id());
         return $this;
+    }
+
+    /**
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function getBalance()
+    {
+        if (!$this->get('balance')->isEmpty()) {
+            return $this->get('balance')->first()->toPrice();
+        }
+    }
+
+    /**
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function getTotalCredit()
+    {
+        if (!$this->get('total_credit')->isEmpty()) {
+            return $this->get('total_credit')->first()->toPrice();
+        }
+    }
+
+    /**
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function getTotalDebit()
+    {
+        if (!$this->get('total_debit')->isEmpty()) {
+            return $this->get('total_debit')->first()->toPrice();
+        }
     }
 
     /**

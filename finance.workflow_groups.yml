@@ -1,0 +1,3 @@
+finance_withdraw:
+  label: Withdraw
+  entity_type: finance_withdraw

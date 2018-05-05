@@ -2,6 +2,7 @@
 
 namespace Drupal\finance\Entity;
 
+use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
@@ -96,6 +97,17 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface
     {
         $this->set('created', $timestamp);
         return $this;
+    }
+
+    /**
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function getAmount()
+    {
+        if (!$this->get('amount')->isEmpty()) {
+            return $this->get('amount')->first()->toPrice();
+        }
     }
 
     /**
