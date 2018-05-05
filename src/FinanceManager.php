@@ -13,20 +13,23 @@ use Drupal\user\Entity\User;
 /**
  * Class FinanceManager.
  */
-class FinanceManager implements FinanceManagerInterface {
+class FinanceManager implements FinanceManagerInterface
+{
 
-  /**
-   * Drupal\Core\Entity\EntityTypeManagerInterface definition.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
-  /**
-   * Constructs a new FinanceManager object.
-   */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
-    $this->entityTypeManager = $entity_type_manager;
-  }
+    /**
+     * Drupal\Core\Entity\EntityTypeManagerInterface definition.
+     *
+     * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+     */
+    protected $entityTypeManager;
+
+    /**
+     * Constructs a new FinanceManager object.
+     */
+    public function __construct(EntityTypeManagerInterface $entity_type_manager)
+    {
+        $this->entityTypeManager = $entity_type_manager;
+    }
 
     /**
      * @inheritdoc
@@ -96,7 +99,7 @@ class FinanceManager implements FinanceManagerInterface {
         $query = \Drupal::entityQuery('finance_ledger')
             ->condition('account_id', $financeAccount->id())
             ->sort('id', 'DESC')
-            ->range(0,1);
+            ->range(0, 1);
         $ids = $query->execute();
 
         if (!empty($ids)) {
@@ -130,5 +133,22 @@ class FinanceManager implements FinanceManagerInterface {
         }
 
         return $account;
+    }
+
+    /**
+     * 账户间转账
+     *
+     * @param Account $form
+     * @param Account $to
+     * @param Price $amount
+     * @param $message
+     * @throws \Drupal\Core\Entity\EntityStorageException
+     */
+    public function transfer(Account $form, Account $to, Price $amount, $message = '', $source = null)
+    {
+        // 记录出账
+        $this->createLedger($form, Ledger::AMOUNT_TYPE_CREDIT, $amount, '', $source);
+        // 记录进账
+        $this->createLedger($to, Ledger::AMOUNT_TYPE_DEBIT, $amount, '', $source);
     }
 }

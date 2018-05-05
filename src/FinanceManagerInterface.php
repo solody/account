@@ -46,4 +46,16 @@ interface FinanceManagerInterface {
                                  Price $amount,
                                  $remarks = '',
                                  $source = null);
+
+    /**
+     * 账户间转账
+     *
+     * @param Account $form
+     * @param Account $to
+     * @param Price $amount
+     * @param string $message
+     * @param null $source
+     * @return mixed
+     */
+    public function transfer(Account $form, Account $to, Price $amount, $message = '', $source = null);
 }
