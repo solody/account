@@ -8,5 +8,7 @@ dependencies:
   - dynamic_entity_reference
   - entity
   - finance
+  - rest
+  - serialization
   - state_machine
   - views
