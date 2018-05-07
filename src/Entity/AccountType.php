@@ -81,4 +81,19 @@ class AccountType extends ConfigEntityBundleBase implements AccountTypeInterface
     {
         return $this->label;
     }
+
+    public function getWithdrawPeriod()
+    {
+        return $this->withdraw_period;
+    }
+
+    public function getMinimumWithdraw()
+    {
+        return $this->minimum_withdraw;
+    }
+
+    public function getMaximumWithdraw()
+    {
+        return $this->maximum_withdraw;
+    }
 }

@@ -38,6 +38,24 @@ GET http://{{host}}/api/rest/views/finance/accounts/4?_format=json
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
+### 检查账户提现限制
+
+GET http://{{host}}/api/rest/finance/withdraw-limitation/2?_format=json
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+### 申请请现
+
+POST http://{{host}}/api/rest/finance/apply-withdraw/1?_format=json
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "amount": "0.00",
+  "transfer_method": 2,
+  "remarks": "用户输入的备注"
+}
+
 ###
 
 

@@ -8,6 +8,7 @@ use Drupal\finance\Entity\Account;
 use Drupal\finance\Entity\AccountType;
 use Drupal\finance\Entity\Ledger;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\finance\Entity\TransferMethod;
 use Drupal\finance\Entity\Withdraw;
 use Drupal\user\Entity\User;
 
@@ -207,5 +208,112 @@ class FinanceManager implements FinanceManagerInterface
         }
 
         return $price;
+    }
+
+    /**
+     * 计算账户的可用余额
+     *
+     * @param Account $account
+     * @return Price
+     * @throws \Exception
+     */
+    public function computeAvailableBalance(Account $account)
+    {
+        $amount = new Price('0.00', 'CNY');
+
+        $ledgers = $this->getLedgers($account);
+        $account_type = AccountType::load($account->bundle());
+        $account_type->getWithdrawPeriod();
+
+        $available_time = (new \DateTime())->sub(new \DateInterval('P'. (int)$account_type->getWithdrawPeriod() .'D'));
+
+        foreach ($ledgers as $ledger) {
+            if ($ledger->getAmountType() === Ledger::AMOUNT_TYPE_DEBIT) {
+                if ($ledger->getCreatedTime() <= $available_time->getTimestamp()) {
+                    $amount = $amount->add($ledger->getAmount());
+                }
+            } elseif ($ledger->getAmountType() === Ledger::AMOUNT_TYPE_CREDIT) {
+                $amount = $amount->subtract($ledger->getAmount());
+            }
+        }
+
+        return $amount;
+    }
+
+    /**
+     * @param Account $account
+     * @return Ledger[]
+     */
+    public function getLedgers(Account $account)
+    {
+        /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
+        $query = \Drupal::entityQuery('finance_ledger')
+            ->condition('account_id', $account->id());
+        $ids = $query->execute();
+
+        if (count($ids)) {
+            return Ledger::loadMultiple($ids);
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * 申请提现
+     *
+     * @param Account $account
+     * @param Price $amount
+     * @param TransferMethod $transferMethod
+     * @param string $remarks
+     * @return Withdraw
+     * @throws \Exception
+     */
+    public function applyWithdraw(Account $account, Price $amount, TransferMethod $transferMethod, $remarks = '')
+    {
+        // 检查提现限制
+        $account_type = AccountType::load($account->bundle());
+        if ((boolean)$account_type->getMaximumWithdraw() && (float)$amount->getNumber() > (float)$account_type->getMaximumWithdraw()) throw new \Exception('申请金额超过了最大限额');
+        if ((boolean)$account_type->getMinimumWithdraw() && (float)$amount->getNumber() < $account_type->getMinimumWithdraw()) throw new \Exception('申请金额没有达到最小限额');
+
+        $available_balance = $this->computeAvailableBalance($account);
+        if ($amount->greaterThan($available_balance)) throw new \Exception('申请金额超过了可提余额');
+
+        // 检查是否有提现单正在处理
+        if ($this->hasProcessingWithdraw($account)) throw new \Exception('您的账户已经有提现申请正在处理，请等待处理完毕，再申请新的提现。');
+
+        // 创建提现单
+        $withdraw = Withdraw::create([
+            'account_id' => $account,
+            'amount' => $amount,
+            'transfer_method' => $transferMethod,
+            'state' => 'draft',
+            'remarks' => $remarks,
+            'name' => $account->getOwner()->getDisplayName() . ' 的 '. $account->getName() . '的提现申请'
+        ]);
+        $withdraw->save();
+
+        return $withdraw;
+    }
+
+
+    /**
+     * 检查是否有正在处理的提现单
+     *
+     * @param Account $account
+     * @return bool
+     */
+    public function hasProcessingWithdraw(Account $account)
+    {
+        /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
+        $query = \Drupal::entityQuery('finance_withdraw')
+            ->condition('account_id', $account->id())
+            ->condition('state', ['draft', 'processing'], 'IN');
+        $ids = $query->execute();
+
+        if (count($ids)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

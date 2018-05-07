@@ -6,6 +6,8 @@ use Drupal\commerce_price\Price;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\finance\Entity\Account;
 use Drupal\finance\Entity\Ledger;
+use Drupal\finance\Entity\TransferMethod;
+use Drupal\finance\Entity\Withdraw;
 use Drupal\user\Entity\User;
 
 /**
@@ -74,4 +76,40 @@ interface FinanceManagerInterface {
      * @return Price
      */
     public function countCompleteWithdrawTotalAmount(Account $account);
+
+    /**
+     * 计算账户的可用余额
+     *
+     * @param Account $account
+     * @return Price
+     */
+    public function computeAvailableBalance(Account $account);
+
+
+    /**
+     * @param Account $account
+     * @return Ledger[]
+     */
+    public function getLedgers(Account $account);
+
+    /**
+     * 申请提现
+     *
+     * @param Account $account
+     * @param Price $amount
+     * @param TransferMethod $transferMethod
+     * @param string $remarks
+     * @return Withdraw
+     * @throws \Exception
+     */
+    public function applyWithdraw(Account $account, Price $amount, TransferMethod $transferMethod, $remarks = '');
+
+
+    /**
+     * 检查是否有正在处理的提现单
+     *
+     * @param Account $account
+     * @return bool
+     */
+    public function hasProcessingWithdraw(Account $account);
 }

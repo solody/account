@@ -2,10 +2,9 @@
 
 namespace Drupal\finance\Plugin\rest\resource;
 
-use Drupal\commerce_price\Price;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\finance\Entity\Account;
-use Drupal\finance\Entity\TransferMethod;
+use Drupal\finance\Entity\AccountType;
 use Drupal\finance\FinanceManagerInterface;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
@@ -13,20 +12,19 @@ use Drupal\rest\ResourceResponse;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Provides a resource to get view modes by entity and bundle.
  *
  * @RestResource(
- *   id = "finance_apply_withdraw",
- *   label = @Translation("Apply withdraw"),
+ *   id = "finance_withdraw_limitation",
+ *   label = @Translation("Withdraw limitation"),
  *   uri_paths = {
- *     "create" = "/api/rest/finance/apply-withdraw/{finance_account}"
+ *     "canonical" = "/api/rest/finance/withdraw-limitation/{finance_account}"
  *   }
  * )
  */
-class ApplyWithdraw extends ResourceBase
+class WithdrawLimitation extends ResourceBase
 {
 
     /**
@@ -44,7 +42,7 @@ class ApplyWithdraw extends ResourceBase
     protected $financeManager;
 
     /**
-     * Constructs a new ApplyWithdraw object.
+     * Constructs a new WithdrawLimitation object.
      *
      * @param array $configuration
      *   A configuration array containing information about the plugin instance.
@@ -58,6 +56,7 @@ class ApplyWithdraw extends ResourceBase
      *   A logger instance.
      * @param \Drupal\Core\Session\AccountProxyInterface $current_user
      *   A current user instance.
+     * @param FinanceManagerInterface $financeManager
      */
     public function __construct(
         array $configuration,
@@ -91,13 +90,15 @@ class ApplyWithdraw extends ResourceBase
     }
 
     /**
-     * Responds to POST requests.
+     * Responds to GET requests.
      *
      * @param Account $account
-     * @return \Drupal\rest\ModifiedResourceResponse
+     * @return \Drupal\rest\ResourceResponse
      *   The HTTP response object.
+     *
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
      */
-    public function post(Account $account, $data)
+    public function get(Account $account)
     {
 
         // You must to implement the logic of your REST Resource here.
@@ -106,16 +107,23 @@ class ApplyWithdraw extends ResourceBase
             throw new AccessDeniedHttpException();
         }
 
-        $transfer_method = TransferMethod::load($data['transfer_method']);
-        if (!$transfer_method) throw new BadRequestHttpException('找不到支付方法：【'.$data['transfer_method'].'】');
+        $account_type = AccountType::load($account->bundle());
 
-        try {
-            $withdraw = $this->financeManager->applyWithdraw($account, new Price($data['amount'], 'CNY'), $transfer_method, $data['remarks']);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException($e->getMessage(), $e);
-        }
+        $response = new ResourceResponse([
+            'balance' => [
+                'total' => $account->getBalance()->toArray(),
+                'available' => $this->financeManager->computeAvailableBalance($account)->toArray()
+            ],
+            'withdraw' => [
+                'min' => $account_type->getMinimumWithdraw(),
+                'max' => $account_type->getMaximumWithdraw(),
+                'period' => $account_type->getWithdrawPeriod()
+            ]
+        ], 200);
+        $response->addCacheableDependency($account);
+        $response->getCacheableMetadata()->setCacheMaxAge(0);
 
-        return new ModifiedResourceResponse($withdraw, 200);
+        return $response;
     }
 
     /**

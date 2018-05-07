@@ -1,0 +1,21 @@
+langcode: zh-hans
+status: true
+dependencies:
+  module:
+    - basic_auth
+    - finance
+    - serialization
+    - simple_oauth
+    - user
+id: finance_withdraw_limitation
+plugin_id: finance_withdraw_limitation
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - basic_auth
+    - oauth2
+    - cookie

@@ -41,4 +41,14 @@ interface LedgerInterface extends ContentEntityInterface, EntityChangedInterface
      * @return Price
      */
     public function getBalance();
+
+    /**
+     * @return string
+     */
+    public function getAmountType();
+
+    /**
+     * @return Price
+     */
+    public function getAmount();
 }

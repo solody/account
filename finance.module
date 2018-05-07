@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\user\RoleInterface;
 
 /**
  * Implements hook_help().
@@ -22,6 +23,21 @@ function finance_help($route_name, RouteMatchInterface $route_match)
 
         default:
     }
+}
+
+/**
+ * Implements hook_install().
+ */
+function finance_install()
+{
+    // 为已认证用户添加权限
+    user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, [
+        'add transfer method entities',
+        'edit transfer method entities',
+        'view transfer method entities',
+        'restful post finance_apply_withdraw',
+        'restful get finance_withdraw_limitation',
+    ]);
 }
 
 /**

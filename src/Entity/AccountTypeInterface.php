@@ -16,4 +16,10 @@ interface AccountTypeInterface extends ConfigEntityInterface
      * @return string
      */
     public function getLabel();
+
+    public function getWithdrawPeriod();
+
+    public function getMinimumWithdraw();
+
+    public function getMaximumWithdraw();
 }
