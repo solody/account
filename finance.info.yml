@@ -4,11 +4,14 @@ description: 'Provides finance functionality.'
 core: 8.x
 package: Custom
 dependencies:
+  - basic_auth
   - commerce_price
   - dynamic_entity_reference
   - entity
   - finance
   - rest
   - serialization
+  - simple_oauth
   - state_machine
+  - user
   - views

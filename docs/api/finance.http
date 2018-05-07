@@ -5,11 +5,39 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-###
+### 获取用户的提现单列表
 
 GET http://{{host}}/api/rest/views/finance/withdraws/1?_format=json&created[min]=2018-01-01&created[max]=2018-05-12
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
+### 创建用户的转账方式
+
+POST http://{{host}}/entity/finance_transfer_method?_format=json
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "type": "alipay",
+  "transfer_gateway": "alipay",
+  "name": "sdfsdf",
+  "user_id": "1",
+  "alipay_name": "王哈哈",
+  "alipay_account": "1267867@qq.com"
+}
+
+### 获取用户的转账方式列表
+
+GET http://{{host}}/api/rest/views/finance/transfer-methods/1?_format=json
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+### 获取用户的账户列表
+
+GET http://{{host}}/api/rest/views/finance/accounts/4?_format=json
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
 ###
+
 
