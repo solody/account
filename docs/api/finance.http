@@ -26,6 +26,19 @@ Authorization: Basic {{username}} {{password}}
   "alipay_account": "1267867@qq.com"
 }
 
+### 修改一个转账方式
+
+PATCH http://{{host}}/admin/finance/finance_transfer_method/2?_format=json
+Content-Type: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+  "type": "alipay",
+  "name": "sdfsdf",
+  "alipay_name": "王哈哈",
+  "alipay_account": "155555@qq.com"
+}
+
 ### 获取用户的转账方式列表
 
 GET http://{{host}}/api/rest/views/finance/transfer-methods/1?_format=json
