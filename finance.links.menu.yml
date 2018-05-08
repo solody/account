@@ -1,5 +1,5 @@
 finance.admin_root:
-  title: 'Finance'
+  title: '财务'
   route_name: 'finance.admin'
   parent: 'system.admin'
   weight: -10
