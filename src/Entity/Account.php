@@ -150,6 +150,16 @@ class Account extends ContentEntityBase implements AccountInterface
     }
 
     /**
+     * @param Price $amount
+     * @return $this
+     */
+    public function setBalance(Price $amount)
+    {
+        $this->set('balance', $amount);
+        return $this;
+    }
+
+    /**
      * @return Price
      * @throws \Drupal\Core\TypedData\Exception\MissingDataException
      */
@@ -161,6 +171,16 @@ class Account extends ContentEntityBase implements AccountInterface
     }
 
     /**
+     * @param Price $amount
+     * @return $this
+     */
+    public function setTotalCredit(Price $amount)
+    {
+        $this->set('total_credit', $amount);
+        return $this;
+    }
+
+    /**
      * @return Price
      * @throws \Drupal\Core\TypedData\Exception\MissingDataException
      */
@@ -169,6 +189,16 @@ class Account extends ContentEntityBase implements AccountInterface
         if (!$this->get('total_debit')->isEmpty()) {
             return $this->get('total_debit')->first()->toPrice();
         }
+    }
+
+    /**
+     * @param Price $amount
+     * @return $this
+     */
+    public function setTotalDebit(Price $amount)
+    {
+        $this->set('total_debit', $amount);
+        return $this;
     }
 
     /**

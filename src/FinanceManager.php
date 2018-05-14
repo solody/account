@@ -88,7 +88,46 @@ class FinanceManager implements FinanceManagerInterface
         $ledger = Ledger::create($create_data);
         $ledger->save();
 
+        // 更新账户统计
+        $this->updateAccountStatistics($financeAccount);
+
         return $ledger;
+    }
+
+    /**
+     * 更新账户统计
+     *
+     * @param Account $account
+     * @throws \Drupal\Core\Entity\EntityStorageException
+     */
+    public function updateAccountStatistics(Account $account)
+    {
+        $ledgers = $this->getLedgers($account);
+        $total_debit = new Price('0.00', 'CNY');
+        $total_credit = new Price('0.00', 'CNY');
+
+        foreach ($ledgers as $ledger) {
+            /** @var Ledger $ledger */
+            if ($ledger->getAmountType() === Ledger::AMOUNT_TYPE_DEBIT) {
+                $total_debit = $total_debit->add($ledger->getAmount());
+            } elseif ($ledger->getAmountType() === Ledger::AMOUNT_TYPE_CREDIT) {
+                $total_credit = $total_credit->add($ledger->getAmount());
+            }
+        }
+
+        $account->setTotalDebit($total_debit);
+        $account->setTotalCredit($total_credit);
+
+        // 计算余额
+        $balance = new Price('0.00', 'CNY');
+        $last_ledger = $this->getLastLedger($account);
+        if ($last_ledger) {
+            $balance = $last_ledger->getBalance();
+        }
+
+        $account->setBalance($balance);
+
+        $account->save();
     }
 
     /**
