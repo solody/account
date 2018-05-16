@@ -9,6 +9,7 @@ dependencies:
   - dynamic_entity_reference
   - entity
   - finance
+  - options
   - rest
   - serialization
   - simple_oauth

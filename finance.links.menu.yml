@@ -5,71 +5,58 @@ finance.admin_root:
   weight: -10
 
 
-# Account menu items definition
-entity.finance_account.collection:
-  title: 'Account list'
-  route_name: entity.finance_account.collection
-  description: 'List Account entities'
-  parent: finance.admin_root
-  weight: 100
+finance.admin_root.config:
+  title: '配置'
+  route_name: 'finance.admin.config'
+  parent: 'finance.admin_root'
+  weight: 999
 
-
-# Account type menu items definition
 entity.finance_account_type.collection:
   title: 'Account type'
   route_name: entity.finance_account_type.collection
   description: 'List Account type (bundles)'
-  parent: finance.admin_root
-  weight: 99
-
-
-# Ledger menu items definition
-entity.finance_ledger.collection:
-  title: 'Ledger list'
-  route_name: entity.finance_ledger.collection
-  description: 'List Ledger entities'
-  parent: finance.admin_root
-  weight: 100
-
-finance_ledger.admin.structure.settings:
-  title: 'Ledger settings'
-  description: 'Configure Ledger entities'
-  route_name: finance_ledger.settings
-  parent: finance.admin_root
-
-# Transfer method menu items definition
-entity.finance_transfer_method.collection:
-  title: 'Transfer method list'
-  route_name: entity.finance_transfer_method.collection
-  description: 'List Transfer method entities'
-  parent: finance.admin_root
-  weight: 100
+  parent: finance.admin_root.config
+  weight: 1
 
 finance_transfer_method.admin.structure.settings:
   title: 'Transfer method settings'
   description: 'Configure Transfer method entities'
   route_name: finance_transfer_method.settings
-  parent: finance.admin_root
-
-# Withdraw menu items definition
-entity.finance_withdraw.collection:
-  title: 'Withdraw list'
-  route_name: entity.finance_withdraw.collection
-  description: 'List Withdraw entities'
-  parent: finance.admin_root
-  weight: 100
+  parent: finance.admin_root.config
 
 finance_withdraw.admin.structure.settings:
   title: 'Withdraw settings'
   description: 'Configure Withdraw entities'
   route_name: finance_withdraw.settings
-  parent: finance.admin_root
+  parent: finance.admin_root.config
 
-# Transfer gateway menu items definition
 entity.finance_transfer_gateway.collection:
   title: 'Transfer gateway'
   route_name: entity.finance_transfer_gateway.collection
   description: 'List Transfer gateway (bundles)'
-  parent: finance.admin_root
+  parent: finance.admin_root.config
   weight: 99
 
+
+
+
+entity.finance_account.collection:
+  title: '账户管理'
+  route_name: entity.finance_account.collection
+  description: 'List Account entities'
+  parent: finance.admin_root
+  weight: 100
+
+entity.finance_transfer_method.collection:
+  title: '转账方法管理'
+  route_name: entity.finance_transfer_method.collection
+  description: 'List Transfer method entities'
+  parent: finance.admin_root
+  weight: 100
+
+entity.finance_withdraw.collection:
+  title: '提现单管理'
+  route_name: entity.finance_withdraw.collection
+  description: 'List Withdraw entities'
+  parent: finance.admin_root
+  weight: 100

@@ -2,6 +2,14 @@ finance.admin:
   path: '/admin/finance'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'Finance'
+    _title: '财务'
+  requirements:
+    _permission: 'access finance administration pages'
+
+finance.admin.config:
+  path: '/admin/finance/config'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: '配置'
   requirements:
     _permission: 'access finance administration pages'

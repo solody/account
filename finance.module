@@ -79,3 +79,10 @@ function finance_theme_suggestions_finance_account(array $variables)
     $suggestions[] = 'finance_account__' . $entity->id() . '__' . $sanitized_view_mode;
     return $suggestions;
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function finance_views_data_alter(array &$data) {
+    $data['finance_withdraw']['state']['filter']['id'] = 'state_machine_state';
+}
