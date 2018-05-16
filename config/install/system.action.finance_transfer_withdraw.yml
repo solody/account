@@ -1,0 +1,10 @@
+langcode: zh-hans
+status: true
+dependencies:
+  module:
+    - finance
+id: finance_transfer_withdraw
+label: 转账
+type: finance_withdraw
+plugin: finance_transfer_withdraw
+configuration: {  }

@@ -434,6 +434,59 @@ display:
           destination: false
           entity_type: finance_withdraw
           plugin_id: entity_operations
+        finance_withdraw_bulk_form:
+          id: finance_withdraw_bulk_form
+          table: finance_withdraw
+          field: finance_withdraw_bulk_form
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 批量更新
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          action_title: 动作
+          include_exclude: exclude
+          selected_actions: {  }
+          entity_type: finance_withdraw
+          plugin_id: bulk_form
       filters:
         state:
           id: state
@@ -554,7 +607,7 @@ display:
           plugin_id: string
       display_extenders: {  }
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -570,7 +623,7 @@ display:
       display_extenders: {  }
       path: admin/finance/withdraw-list/%account_type
     cache_metadata:
-      max-age: -1
+      max-age: 0
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
