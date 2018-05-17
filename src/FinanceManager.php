@@ -355,4 +355,18 @@ class FinanceManager implements FinanceManagerInterface
             return false;
         }
     }
+
+    /**
+     * @param $type
+     * @return Account[]
+     */
+    public function getAccountsByType($type)
+    {
+        /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
+        $query = \Drupal::entityQuery('finance_account')
+            ->condition('type', $type);
+        $ids = $query->execute();
+        if ($ids) return Account::loadMultiple($ids);
+        else return [];
+    }
 }

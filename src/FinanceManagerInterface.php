@@ -112,4 +112,10 @@ interface FinanceManagerInterface {
      * @return bool
      */
     public function hasProcessingWithdraw(Account $account);
+
+    /**
+     * @param $type
+     * @return Account[]
+     */
+    public function getAccountsByType($type);
 }
