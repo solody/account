@@ -111,6 +111,14 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface
     }
 
     /**
+     * @return Account
+     */
+    public function getAccount()
+    {
+        return $this->get('account_id')->entity;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function baseFieldDefinitions(EntityTypeInterface $entity_type)

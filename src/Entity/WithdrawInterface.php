@@ -11,46 +11,58 @@ use Drupal\user\EntityOwnerInterface;
  *
  * @ingroup finance
  */
-interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterface {
+interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterface
+{
 
-  // Add get/set methods for your configuration properties here.
+    // Add get/set methods for your configuration properties here.
 
-  /**
-   * Gets the Withdraw name.
-   *
-   * @return string
-   *   Name of the Withdraw.
-   */
-  public function getName();
+    /**
+     * Gets the Withdraw name.
+     *
+     * @return string
+     *   Name of the Withdraw.
+     */
+    public function getName();
 
-  /**
-   * Sets the Withdraw name.
-   *
-   * @param string $name
-   *   The Withdraw name.
-   *
-   * @return \Drupal\finance\Entity\WithdrawInterface
-   *   The called Withdraw entity.
-   */
-  public function setName($name);
+    /**
+     * Sets the Withdraw name.
+     *
+     * @param string $name
+     *   The Withdraw name.
+     *
+     * @return \Drupal\finance\Entity\WithdrawInterface
+     *   The called Withdraw entity.
+     */
+    public function setName($name);
 
-  /**
-   * Gets the Withdraw creation timestamp.
-   *
-   * @return int
-   *   Creation timestamp of the Withdraw.
-   */
-  public function getCreatedTime();
+    /**
+     * Gets the Withdraw creation timestamp.
+     *
+     * @return int
+     *   Creation timestamp of the Withdraw.
+     */
+    public function getCreatedTime();
 
-  /**
-   * Sets the Withdraw creation timestamp.
-   *
-   * @param int $timestamp
-   *   The Withdraw creation timestamp.
-   *
-   * @return \Drupal\finance\Entity\WithdrawInterface
-   *   The called Withdraw entity.
-   */
-  public function setCreatedTime($timestamp);
+    /**
+     * Sets the Withdraw creation timestamp.
+     *
+     * @param int $timestamp
+     *   The Withdraw creation timestamp.
+     *
+     * @return \Drupal\finance\Entity\WithdrawInterface
+     *   The called Withdraw entity.
+     */
+    public function setCreatedTime($timestamp);
 
+
+    /**
+     * @return Price
+     * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+     */
+    public function getAmount();
+
+    /**
+     * @return Account
+     */
+    public function getAccount();
 }

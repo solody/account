@@ -5,3 +5,8 @@ services:
   finance.finance_manager:
     class: Drupal\finance\FinanceManager
     arguments: ['@entity_type.manager']
+  finance.withdraw_subscriber:
+    class: Drupal\finance\EventSubscriber\WithdrawSubscriber
+    arguments: ['@finance.finance_manager']
+    tags:
+      - { name: event_subscriber }

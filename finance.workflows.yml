@@ -16,7 +16,7 @@ withdraw_default:
       label: '通过审核'
       from: [draft]
       to: processing
-    paid:
+    transfer:
       label: '完成打款'
       from: [processing]
       to: completed
