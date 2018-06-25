@@ -3,6 +3,7 @@
 namespace Drupal\finance\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\finance\Plugin\TransferGatewayManager;
 
 /**
  * Defines the Transfer gateway entity.
@@ -54,4 +55,57 @@ class TransferGateway extends ConfigEntityBase implements TransferGatewayInterfa
    */
   protected $label;
 
+  /**
+   * The plugin ID.
+   *
+   * @var string
+   */
+  protected $plugin;
+
+  /**
+   * The plugin configuration.
+   *
+   * @var array
+   */
+  protected $configuration = [];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPlugin() {
+    /** @var TransferGatewayManager $plugin_manager */
+    $plugin_manager = \Drupal::service('plugin.manager.transfer_gateway');
+    return $plugin_manager->createInstance($this->plugin, $this->configuration);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPluginId() {
+    return $this->plugin;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setPluginId($plugin_id) {
+    $this->plugin = $plugin_id;
+    $this->configuration = [];
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getPluginConfiguration() {
+    return $this->configuration;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setPluginConfiguration(array $configuration) {
+    $this->configuration = $configuration;
+    return $this;
+  }
 }

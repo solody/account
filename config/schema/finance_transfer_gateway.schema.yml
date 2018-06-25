@@ -8,5 +8,10 @@ finance.finance_transfer_gateway.*:
     label:
       type: label
       label: 'Label'
+    plugin:
+      type: string
+      label: 'Plugin'
+    configuration:
+      type: finance.finance_transfer_gateway.plugin.[%parent.plugin]
     uuid:
       type: string

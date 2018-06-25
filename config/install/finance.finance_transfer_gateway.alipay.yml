@@ -1,5 +1,0 @@
-langcode: zh-hans
-status: true
-dependencies: {  }
-id: alipay
-label: 支付宝
