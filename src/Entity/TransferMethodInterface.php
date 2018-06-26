@@ -53,4 +53,14 @@ interface TransferMethodInterface extends ContentEntityInterface, EntityChangedI
    */
   public function setCreatedTime($timestamp);
 
+  /**
+   * @param TransferGatewayInterface $transfer_gateway
+   * @return $this
+   */
+  public function setTransferGateway(TransferGatewayInterface $transfer_gateway);
+
+  /**
+   * @return TransferGatewayInterface
+   */
+  public function getTransferGateway();
 }
