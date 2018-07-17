@@ -36,6 +36,7 @@ class WithdrawSubscriber implements EventSubscriberInterface {
   static function getSubscribedEvents() {
     $events['finance_withdraw.transfer.pre_transition'] = ['finance_withdraw_transfer_pre_transition'];
     $events['finance_withdraw.transfer.post_transition'] = ['finance_withdraw_transfer_post_transition'];
+    $events['finance_withdraw.cancel.post_transition'] = ['finance_withdraw_cancel_post_transition'];
 
     return $events;
   }
@@ -47,6 +48,7 @@ class WithdrawSubscriber implements EventSubscriberInterface {
    * 状态切换之前，执行转账插件
    *
    * @param WorkflowTransitionEvent $event
+   * @throws \Exception
    */
   public function finance_withdraw_transfer_pre_transition(WorkflowTransitionEvent $event) {
     /** @var Withdraw $withdraw */
@@ -59,7 +61,7 @@ class WithdrawSubscriber implements EventSubscriberInterface {
         $plugin = $gateway->getPlugin();
         if ($plugin instanceof \Drupal\finance\Plugin\TransferGatewayInterface) {
           if (!$plugin->transfer($withdraw)) {
-            throw new \Exception('转账失败：'.$plugin->getPluginId());
+            throw new \Exception('转账失败：' . $plugin->getPluginId());
           }
         }
       }
@@ -70,7 +72,7 @@ class WithdrawSubscriber implements EventSubscriberInterface {
    * This method is called whenever the finance_withdraw.transfer.post_transition event is
    * dispatched.
    *
-   * 转账完成后，记账到账户，增加一个笔出项金额，TODO:: 提现手续费
+   * TODO:: 提现手续费
    *
    * @param WorkflowTransitionEvent $event
    * @throws \Drupal\Core\TypedData\Exception\MissingDataException
@@ -78,14 +80,27 @@ class WithdrawSubscriber implements EventSubscriberInterface {
   public function finance_withdraw_transfer_post_transition(WorkflowTransitionEvent $event) {
     /** @var Withdraw $withdraw */
     $withdraw = $event->getEntity();
+  }
+
+  /**
+   * This method is called whenever the finance_withdraw.cancel.post_transition event is
+   * dispatched.
+   *
+   * 退款到账户余额
+   *
+   * @param WorkflowTransitionEvent $event
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function finance_withdraw_cancel_post_transition(WorkflowTransitionEvent $event) {
+    /** @var Withdraw $withdraw */
+    $withdraw = $event->getEntity();
 
     $this->financeFinanceManager->createLedger(
       $withdraw->getAccount(),
-      Ledger::AMOUNT_TYPE_CREDIT,
+      Ledger::AMOUNT_TYPE_DEBIT,
       $withdraw->getAmount(),
-      '提现单 [' . $withdraw->id() . '] 提现成功，支出' . $withdraw->getAmount()->getCurrencyCode() . $withdraw->getAmount()->getNumber(),
+      '提现单 [' . $withdraw->id() . '] 被拒绝，金额退回' . $withdraw->getAmount()->getCurrencyCode() . $withdraw->getAmount()->getNumber(),
       $withdraw
     );
   }
-
 }
