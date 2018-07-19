@@ -1,2 +1,2 @@
-required:
+exclude:
   - finance.finance_transfer_gateway.alipay

@@ -84,8 +84,8 @@ display:
             source__target_id: source__target_id
           info:
             id:
-              sortable: false
-              default_sort_order: asc
+              sortable: true
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
@@ -126,7 +126,7 @@ display:
               empty_column: false
               responsive: ''
             created:
-              sortable: true
+              sortable: false
               default_sort_order: desc
               align: ''
               separator: ''
@@ -139,7 +139,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          default: created
+          default: id
           empty_table: false
       row:
         type: fields
