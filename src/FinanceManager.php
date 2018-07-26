@@ -58,36 +58,60 @@ class FinanceManager implements FinanceManagerInterface {
     Price $amount,
     $remarks = '',
     $source = null) {
-    // 计算余额
-    $balance = new Price('0.00', 'CNY');
-    $last_ledger = $this->getLastLedger($financeAccount);
-    if ($last_ledger) {
-      $balance = $last_ledger->getBalance();
+
+    // 使用操作锁，防止并发操作造成数据计算错误
+    $lock = \Drupal::lock();
+    $operationID = 'finance__create_ledger__' . $financeAccount->id();
+    $is_get_lock = $lock->acquire($operationID);
+    if (!$is_get_lock) {
+      if (!$lock->wait($operationID, 30)) {
+        $is_get_lock = $lock->acquire($operationID);
+      }
     }
+    if ($is_get_lock) {
 
-    if ($amountType === Ledger::AMOUNT_TYPE_DEBIT) {
-      $balance = $balance->add($amount);
-    } elseif ($amountType === Ledger::AMOUNT_TYPE_CREDIT) {
-      $balance = $balance->subtract($amount);
+      try {
+
+        // 计算余额
+        $balance = new Price('0.00', 'CNY');
+        $last_ledger = $this->getLastLedger($financeAccount);
+        if ($last_ledger) {
+          $balance = $last_ledger->getBalance();
+        }
+
+        if ($amountType === Ledger::AMOUNT_TYPE_DEBIT) {
+          $balance = $balance->add($amount);
+        } elseif ($amountType === Ledger::AMOUNT_TYPE_CREDIT) {
+          $balance = $balance->subtract($amount);
+        }
+
+        $create_data = [
+          'account_id' => $financeAccount,
+          'amount_type' => $amountType,
+          'amount' => $amount,
+          'balance' => $balance,
+          'remarks' => $remarks
+        ];
+
+        if ($source) $create_data['source'] = $source;
+
+        $ledger = Ledger::create($create_data);
+        $ledger->save();
+
+        // 更新账户统计
+        $this->updateAccountStatistics($financeAccount);
+
+        $lock->release($operationID);
+
+        return $ledger;
+      } catch (\Exception $exception) {
+        $lock->release($operationID);
+        throw $exception;
+      }
+
+    } else {
+      throw new \Exception('未能取得操作['.$operationID.']的锁，无法执行记账操作。');
     }
-
-    $create_data = [
-      'account_id' => $financeAccount,
-      'amount_type' => $amountType,
-      'amount' => $amount,
-      'balance' => $balance,
-      'remarks' => $remarks
-    ];
-
-    if ($source) $create_data['source'] = $source;
-
-    $ledger = Ledger::create($create_data);
-    $ledger->save();
-
-    // 更新账户统计
-    $this->updateAccountStatistics($financeAccount);
-
-    return $ledger;
   }
 
   /**
@@ -180,9 +204,9 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function transfer(Account $form, Account $to, Price $amount, $message = '', $source = null) {
     // 记录出账
-    $this->createLedger($form, Ledger::AMOUNT_TYPE_CREDIT, $amount, '', $source);
+    $this->createLedger($form, Ledger::AMOUNT_TYPE_CREDIT, $amount, $message, $source);
     // 记录进账
-    $this->createLedger($to, Ledger::AMOUNT_TYPE_DEBIT, $amount, '', $source);
+    $this->createLedger($to, Ledger::AMOUNT_TYPE_DEBIT, $amount, $message, $source);
   }
 
   /**
