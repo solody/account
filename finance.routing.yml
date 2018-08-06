@@ -13,3 +13,12 @@ finance.admin.config:
     _title: '配置'
   requirements:
     _permission: 'access finance administration pages'
+
+finance.finance_apply_withdraw_form:
+  path: '/admin/finance/form/apply_withdraw/{finance_account}'
+  defaults:
+    _form: '\Drupal\finance\Form\ApplyWithdrawForm'
+    _title: '申请提现'
+  requirements:
+    _permission: 'apply withdraw for own finance account'
+  

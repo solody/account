@@ -75,3 +75,7 @@ edit withdraw entities:
 
 view withdraw entities:
   title: 'View Withdraw entities'
+
+
+apply withdraw for own finance account:
+  title: '对自己的账户申请提现'
