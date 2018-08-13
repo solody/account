@@ -35,6 +35,26 @@ interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterfa
    */
   public function setName($name);
 
+
+  /**
+   * Gets the Withdraw transaction_number.
+   *
+   * @return string
+   *   TransactionNumber of the Withdraw.
+   */
+  public function getTransactionNumber();
+
+  /**
+   * Sets the Withdraw transaction_number.
+   *
+   * @param string $transaction_number
+   *   The Withdraw transaction_number.
+   *
+   * @return \Drupal\finance\Entity\WithdrawInterface
+   *   The called Withdraw entity.
+   */
+  public function setTransactionNumber($transaction_number);
+
   /**
    * Gets the Withdraw creation timestamp.
    *

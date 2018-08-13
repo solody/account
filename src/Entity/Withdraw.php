@@ -81,6 +81,21 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
   /**
    * {@inheritdoc}
    */
+  public function getTransactionNumber() {
+    return $this->get('transaction_number')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setTransactionNumber($transaction_number) {
+    $this->set('transaction_number', $transaction_number);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
