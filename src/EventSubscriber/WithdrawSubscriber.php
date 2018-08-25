@@ -60,8 +60,10 @@ class WithdrawSubscriber implements EventSubscriberInterface {
       if ($gateway instanceof TransferGatewayInterface) {
         $plugin = $gateway->getPlugin();
         if ($plugin instanceof \Drupal\finance\Plugin\TransferGatewayInterface) {
-          if (!$plugin->transfer($withdraw)) {
-            throw new \Exception('转账失败：' . $plugin->getPluginId());
+          try {
+            $plugin->transfer($withdraw);
+          } catch (\Exception $exception) {
+            \Drupal::messenger()->addWarning('提现单['.$withdraw->id().']状态已切换为[已完成]，但自动打款失败：' . $plugin->getPluginId().':'.$exception->getMessage());
           }
         }
       }
