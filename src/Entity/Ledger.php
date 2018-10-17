@@ -51,140 +51,153 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "finance_ledger.settings"
  * )
  */
-class Ledger extends ContentEntityBase implements LedgerInterface
-{
-    const AMOUNT_TYPE_DEBIT = 'debit';  // 借记，进项
-    const AMOUNT_TYPE_CREDIT = 'credit'; // 贷记，出项
+class Ledger extends ContentEntityBase implements LedgerInterface {
+  const AMOUNT_TYPE_DEBIT = 'debit';  // 借记，进项
+  const AMOUNT_TYPE_CREDIT = 'credit'; // 贷记，出项
 
-    use EntityChangedTrait;
+  use EntityChangedTrait;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function preCreate(EntityStorageInterface $storage_controller, array &$values)
-    {
-        parent::preCreate($storage_controller, $values);
+  /**
+   * {@inheritdoc}
+   */
+  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
+    parent::preCreate($storage_controller, $values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCreatedTime() {
+    return $this->get('created')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setCreatedTime($timestamp) {
+    $this->set('created', $timestamp);
+    return $this;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getBalance() {
+    if (!$this->get('balance')->isEmpty()) {
+      return $this->get('balance')->first()->toPrice();
     }
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedTime()
-    {
-        return $this->get('created')->value;
+  /**
+   * @return string
+   */
+  public function getAmountType() {
+    return $this->get('amount_type')->value;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  public function getAmount() {
+    if (!$this->get('amount')->isEmpty()) {
+      return $this->get('amount')->first()->toPrice();
     }
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedTime($timestamp)
-    {
-        $this->set('created', $timestamp);
-        return $this;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getAccount() {
+    return $this->get('account_id')->entity;
+  }
 
-    /**
-     * @inheritdoc
-     */
-    public function getBalance()
-    {
-        if (!$this->get('balance')->isEmpty()) {
-            return $this->get('balance')->first()->toPrice();
-        }
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getAccountId() {
+    return $this->get('account_id')->target_id;
+  }
 
-    /**
-     * @return string
-     */
-    public function getAmountType()
-    {
-        return $this->get('amount_type')->value;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getAccountType() {
+    return $this->getAccount()->bundle();
+  }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAmount()
-    {
-        if (!$this->get('amount')->isEmpty()) {
-            return $this->get('amount')->first()->toPrice();
-        }
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+    $fields = parent::baseFieldDefinitions($entity_type);
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function baseFieldDefinitions(EntityTypeInterface $entity_type)
-    {
-        $fields = parent::baseFieldDefinitions($entity_type);
+    // 所属账户
+    $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('所属账户'))
+      ->setSetting('target_type', 'finance_account')
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'entity_reference_label',
+        'weight' => 0,
+      ]);
 
-        // 所属账户
-        $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
-            ->setLabel(t('所属账户'))
-            ->setSetting('target_type', 'finance_account')
-            ->setDisplayOptions('view', [
-                'label' => 'inline',
-                'type' => 'entity_reference_label',
-                'weight' => 0,
-            ]);
+    // 记账类型（进/出）
+    $fields['amount_type'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('记账类型'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'string',
+        'weight' => 0,
+      ]);
 
-        // 记账类型（进/出）
-        $fields['amount_type'] = BaseFieldDefinition::create('string')
-            ->setLabel(t('记账类型'))
-            ->setDisplayOptions('view', [
-                'label' => 'inline',
-                'type' => 'string',
-                'weight' => 0,
-            ]);
+    // 记账金额
+    $fields['amount'] = BaseFieldDefinition::create('commerce_price')
+      ->setLabel(t('记账金额'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'commerce_price_default',
+        'weight' => 0,
+      ]);
 
-        // 记账金额
-        $fields['amount'] = BaseFieldDefinition::create('commerce_price')
-            ->setLabel(t('记账金额'))
-            ->setDisplayOptions('view', [
-                'label' => 'inline',
-                'type' => 'commerce_price_default',
-                'weight' => 0,
-            ]);
+    // 记账余额
+    $fields['balance'] = BaseFieldDefinition::create('commerce_price')
+      ->setLabel(t('记账余额'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'commerce_price_default',
+        'weight' => 0,
+      ]);
 
-        // 记账余额
-        $fields['balance'] = BaseFieldDefinition::create('commerce_price')
-            ->setLabel(t('记账余额'))
-            ->setDisplayOptions('view', [
-                'label' => 'above',
-                'type' => 'commerce_price_default',
-                'weight' => 0,
-            ]);
+    // 备注
+    $fields['remarks'] = BaseFieldDefinition::create('string_long')
+      ->setLabel(t('备注'))
+      ->setDefaultValue('')
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => 0,
+      ]);
 
-        // 备注
-        $fields['remarks'] = BaseFieldDefinition::create('string_long')
-            ->setLabel(t('备注'))
-            ->setDefaultValue('')
-            ->setDisplayOptions('view', [
-                'label' => 'above',
-                'type' => 'string',
-                'weight' => 0,
-            ]);
+    $fields['source'] = BaseFieldDefinition::create('dynamic_entity_reference')
+      ->setLabel(t('记账来源'))
+      ->setDisplayOptions('view', [
+        'type' => 'dynamic_entity_reference_label'
+      ]);
 
-        $fields['source'] = BaseFieldDefinition::create('dynamic_entity_reference')
-            ->setLabel(t('记账来源'))
-            ->setDisplayOptions('view', [
-                'type' => 'dynamic_entity_reference_label'
-            ]);
+    // 发生时间
+    $fields['created'] = BaseFieldDefinition::create('created')
+      ->setLabel(t('发生时间'))
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'timestamp',
+        'weight' => 0,
+      ]);
 
-        // 发生时间
-        $fields['created'] = BaseFieldDefinition::create('created')
-            ->setLabel(t('发生时间'))
-            ->setDisplayOptions('view', [
-                'label' => 'inline',
-                'type' => 'timestamp',
-                'weight' => 0,
-            ]);
+    $fields['changed'] = BaseFieldDefinition::create('changed')
+      ->setLabel(t('Changed'))
+      ->setDescription(t('The time that the entity was last edited.'));
 
-        $fields['changed'] = BaseFieldDefinition::create('changed')
-            ->setLabel(t('Changed'))
-            ->setDescription(t('The time that the entity was last edited.'));
-
-        return $fields;
-    }
+    return $fields;
+  }
 
 }

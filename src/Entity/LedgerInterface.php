@@ -13,42 +13,56 @@ use Drupal\user\EntityOwnerInterface;
  *
  * @ingroup finance
  */
-interface LedgerInterface extends ContentEntityInterface, EntityChangedInterface
-{
+interface LedgerInterface extends ContentEntityInterface, EntityChangedInterface {
 
-    // Add get/set methods for your configuration properties here.
+  // Add get/set methods for your configuration properties here.
 
-    /**
-     * Gets the Ledger creation timestamp.
-     *
-     * @return int
-     *   Creation timestamp of the Ledger.
-     */
-    public function getCreatedTime();
+  /**
+   * Gets the Ledger creation timestamp.
+   *
+   * @return int
+   *   Creation timestamp of the Ledger.
+   */
+  public function getCreatedTime();
 
-    /**
-     * Sets the Ledger creation timestamp.
-     *
-     * @param int $timestamp
-     *   The Ledger creation timestamp.
-     *
-     * @return \Drupal\finance\Entity\LedgerInterface
-     *   The called Ledger entity.
-     */
-    public function setCreatedTime($timestamp);
+  /**
+   * Sets the Ledger creation timestamp.
+   *
+   * @param int $timestamp
+   *   The Ledger creation timestamp.
+   *
+   * @return \Drupal\finance\Entity\LedgerInterface
+   *   The called Ledger entity.
+   */
+  public function setCreatedTime($timestamp);
 
-    /**
-     * @return Price
-     */
-    public function getBalance();
+  /**
+   * @return Price
+   */
+  public function getBalance();
 
-    /**
-     * @return string
-     */
-    public function getAmountType();
+  /**
+   * @return string
+   */
+  public function getAmountType();
 
-    /**
-     * @return Price
-     */
-    public function getAmount();
+  /**
+   * @return Price
+   */
+  public function getAmount();
+
+  /**
+   * @return Account
+   */
+  public function getAccount();
+
+  /**
+   * @return integer
+   */
+  public function getAccountId();
+
+  /**
+   * @return string
+   */
+  public function getAccountType();
 }
