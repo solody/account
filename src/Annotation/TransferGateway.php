@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\finance\Annotation;
+namespace Drupal\account\Annotation;
 
 use Drupal\Component\Annotation\Plugin;
 
 /**
  * Defines a Transfer gateway item annotation object.
  *
- * @see \Drupal\finance\Plugin\TransferGatewayManager
+ * @see \Drupal\account\Plugin\TransferGatewayManager
  * @see plugin_api
  *
  * @Annotation

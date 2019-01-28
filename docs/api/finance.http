@@ -7,13 +7,13 @@
 
 ### 获取用户的提现单列表
 
-GET http://{{host}}/api/rest/views/finance/withdraws/1?_format=json&created[min]=2018-01-01&created[max]=2018-05-12
+GET http://{{host}}/api/rest/views/account/withdraws/1?_format=json&created[min]=2018-01-01&created[max]=2018-05-12
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
 ### 创建用户的转账方式
 
-POST http://{{host}}/entity/finance_transfer_method?_format=json
+POST http://{{host}}/entity/account_transfer_method?_format=json
 Content-Type: application/json
 Authorization: Basic {{username}} {{password}}
 
@@ -28,7 +28,7 @@ Authorization: Basic {{username}} {{password}}
 
 ### 修改一个转账方式
 
-PATCH http://{{host}}/admin/finance/finance_transfer_method/2?_format=json
+PATCH http://{{host}}/admin/account/account_transfer_method/2?_format=json
 Content-Type: application/json
 Authorization: Basic {{username}} {{password}}
 
@@ -41,25 +41,25 @@ Authorization: Basic {{username}} {{password}}
 
 ### 获取用户的转账方式列表
 
-GET http://{{host}}/api/rest/views/finance/transfer-methods/1?_format=json
+GET http://{{host}}/api/rest/views/account/transfer-methods/1?_format=json
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
 ### 获取用户的账户列表
 
-GET http://{{host}}/api/rest/views/finance/accounts/4?_format=json
+GET http://{{host}}/api/rest/views/account/accounts/4?_format=json
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
 ### 检查账户提现限制
 
-GET http://{{host}}/api/rest/finance/withdraw-limitation/2?_format=json
+GET http://{{host}}/api/rest/account/withdraw-limitation/2?_format=json
 Accept: application/json
 Authorization: Basic {{username}} {{password}}
 
 ### 申请请现
 
-POST http://{{host}}/api/rest/finance/apply-withdraw/1?_format=json
+POST http://{{host}}/api/rest/account/apply-withdraw/1?_format=json
 Content-Type: application/json
 Authorization: Basic {{username}} {{password}}
 

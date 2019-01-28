@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;
@@ -43,7 +43,7 @@ class WithdrawHtmlRouteProvider extends AdminHtmlRouteProvider {
       $route = new Route("/admin/structure/{$entity_type->id()}/settings");
       $route
         ->setDefaults([
-          '_form' => 'Drupal\finance\Form\WithdrawSettingsForm',
+          '_form' => 'Drupal\account\Form\WithdrawSettingsForm',
           '_title' => "{$entity_type->getLabel()} settings",
         ])
         ->setRequirement('_permission', $entity_type->getAdminPermission())

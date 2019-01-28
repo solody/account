@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -10,7 +10,7 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface for defining Account entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 interface AccountInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface
 {
@@ -31,7 +31,7 @@ interface AccountInterface extends ContentEntityInterface, EntityChangedInterfac
      * @param string $name
      *   The Account name.
      *
-     * @return \Drupal\finance\Entity\AccountInterface
+     * @return \Drupal\account\Entity\AccountInterface
      *   The called Account entity.
      */
     public function setName($name);
@@ -50,7 +50,7 @@ interface AccountInterface extends ContentEntityInterface, EntityChangedInterfac
      * @param int $timestamp
      *   The Account creation timestamp.
      *
-     * @return \Drupal\finance\Entity\AccountInterface
+     * @return \Drupal\account\Entity\AccountInterface
      *   The called Account entity.
      */
     public function setCreatedTime($timestamp);

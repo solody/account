@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -9,7 +9,7 @@ use Drupal\Core\Link;
 /**
  * Defines a class to build a listing of Withdraw entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class WithdrawListBuilder extends EntityListBuilder {
 
@@ -27,12 +27,12 @@ class WithdrawListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\finance\Entity\Withdraw */
+    /* @var $entity \Drupal\account\Entity\Withdraw */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),
-      'entity.finance_withdraw.edit_form',
-      ['finance_withdraw' => $entity->id()]
+      'entity.withdraw.edit_form',
+      ['withdraw' => $entity->id()]
     );
     return $row + parent::buildRow($entity);
   }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for Ledger edit forms.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class LedgerForm extends ContentEntityForm {
 
@@ -16,7 +16,7 @@ class LedgerForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\finance\Entity\Ledger */
+    /* @var $entity \Drupal\account\Entity\Ledger */
     $form = parent::buildForm($form, $form_state);
 
     $entity = $this->entity;
@@ -44,7 +44,7 @@ class LedgerForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.finance_ledger.canonical', ['finance_ledger' => $entity->id()]);
+    $form_state->setRedirect('entity.ledger.canonical', ['ledger' => $entity->id()]);
   }
 
 }

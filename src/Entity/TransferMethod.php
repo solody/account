@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -12,28 +12,28 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Transfer method entity.
  *
- * @ingroup finance
+ * @ingroup account
  *
  * @ContentEntityType(
- *   id = "finance_transfer_method",
+ *   id = "account_transfer_method",
  *   label = @Translation("Transfer method"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\TransferMethodListBuilder",
- *     "views_data" = "Drupal\finance\Entity\TransferMethodViewsData",
+ *     "list_builder" = "Drupal\account\TransferMethodListBuilder",
+ *     "views_data" = "Drupal\account\Entity\TransferMethodViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\finance\Form\TransferMethodForm",
- *       "add" = "Drupal\finance\Form\TransferMethodForm",
- *       "edit" = "Drupal\finance\Form\TransferMethodForm",
- *       "delete" = "Drupal\finance\Form\TransferMethodDeleteForm",
+ *       "default" = "Drupal\account\Form\TransferMethodForm",
+ *       "add" = "Drupal\account\Form\TransferMethodForm",
+ *       "edit" = "Drupal\account\Form\TransferMethodForm",
+ *       "delete" = "Drupal\account\Form\TransferMethodDeleteForm",
  *     },
- *     "access" = "Drupal\finance\TransferMethodAccessControlHandler",
+ *     "access" = "Drupal\account\TransferMethodAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\finance\TransferMethodHtmlRouteProvider",
+ *       "html" = "Drupal\account\TransferMethodHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "finance_transfer_method",
+ *   base_table = "account_transfer_method",
  *   admin_permission = "administer transfer method entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -44,13 +44,13 @@ use Drupal\user\UserInterface;
  *     "bundle" = "type",
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_transfer_method/{finance_transfer_method}",
- *     "add-form" = "/admin/finance/finance_transfer_method/add",
- *     "edit-form" = "/admin/finance/finance_transfer_method/{finance_transfer_method}/edit",
- *     "delete-form" = "/admin/finance/finance_transfer_method/{finance_transfer_method}/delete",
- *     "collection" = "/admin/finance/finance_transfer_method",
+ *     "canonical" = "/admin/account/account_transfer_method/{account_transfer_method}",
+ *     "add-form" = "/admin/account/account_transfer_method/add",
+ *     "edit-form" = "/admin/account/account_transfer_method/{account_transfer_method}/edit",
+ *     "delete-form" = "/admin/account/account_transfer_method/{account_transfer_method}/delete",
+ *     "collection" = "/admin/account/account_transfer_method",
  *   },
- *   field_ui_base_route = "finance_transfer_method.settings",
+ *   field_ui_base_route = "account_transfer_method.settings",
  *   bundle_label = @Translation("Transfer method type"),
  *   bundle_plugin_type = "transfer_gateway"
  * )
@@ -171,7 +171,7 @@ class TransferMethod extends ContentEntityBase implements TransferMethodInterfac
       ->setLabel(t('Transfer gateway'))
       ->setDescription(t('The transfer gateway.'))
       ->setRequired(TRUE)
-      ->setSetting('target_type', 'finance_transfer_gateway')
+      ->setSetting('target_type', 'account_transfer_gateway')
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'entity_reference_label'

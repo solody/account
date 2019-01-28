@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\ContentEntityDeleteForm;
 
 /**
  * Provides a form for deleting Transfer method entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class TransferMethodDeleteForm extends ContentEntityDeleteForm {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 

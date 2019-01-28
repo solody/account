@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\finance\Entity\Account;
-use Drupal\finance\Entity\Ledger;
-use Drupal\finance\Entity\TransferMethod;
-use Drupal\finance\Entity\Withdraw;
+use Drupal\account\Entity\Account;
+use Drupal\account\Entity\Ledger;
+use Drupal\account\Entity\TransferMethod;
+use Drupal\account\Entity\Withdraw;
 use Drupal\user\Entity\User;
 
 /**

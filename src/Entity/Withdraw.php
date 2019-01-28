@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -13,28 +13,28 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Withdraw entity.
  *
- * @ingroup finance
+ * @ingroup account
  *
  * @ContentEntityType(
- *   id = "finance_withdraw",
+ *   id = "withdraw",
  *   label = @Translation("Withdraw"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\WithdrawListBuilder",
- *     "views_data" = "Drupal\finance\Entity\WithdrawViewsData",
+ *     "list_builder" = "Drupal\account\WithdrawListBuilder",
+ *     "views_data" = "Drupal\account\Entity\WithdrawViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\finance\Form\WithdrawForm",
- *       "add" = "Drupal\finance\Form\WithdrawForm",
- *       "edit" = "Drupal\finance\Form\WithdrawForm",
- *       "delete" = "Drupal\finance\Form\WithdrawDeleteForm",
+ *       "default" = "Drupal\account\Form\WithdrawForm",
+ *       "add" = "Drupal\account\Form\WithdrawForm",
+ *       "edit" = "Drupal\account\Form\WithdrawForm",
+ *       "delete" = "Drupal\account\Form\WithdrawDeleteForm",
  *     },
- *     "access" = "Drupal\finance\WithdrawAccessControlHandler",
+ *     "access" = "Drupal\account\WithdrawAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\finance\WithdrawHtmlRouteProvider",
+ *       "html" = "Drupal\account\WithdrawHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "finance_withdraw",
+ *   base_table = "withdraw",
  *   admin_permission = "administer withdraw entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -43,13 +43,13 @@ use Drupal\user\UserInterface;
  *     "langcode" = "langcode",
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_withdraw/{finance_withdraw}",
- *     "add-form" = "/admin/finance/finance_withdraw/add",
- *     "edit-form" = "/admin/finance/finance_withdraw/{finance_withdraw}/edit",
- *     "delete-form" = "/admin/finance/finance_withdraw/{finance_withdraw}/delete",
- *     "collection" = "/admin/finance/finance_withdraw",
+ *     "canonical" = "/admin/account/withdraw/{withdraw}",
+ *     "add-form" = "/admin/account/withdraw/add",
+ *     "edit-form" = "/admin/account/withdraw/{withdraw}/edit",
+ *     "delete-form" = "/admin/account/withdraw/{withdraw}/delete",
+ *     "collection" = "/admin/account/withdraw",
  *   },
- *   field_ui_base_route = "finance_withdraw.settings"
+ *   field_ui_base_route = "withdraw.settings"
  * )
  */
 class Withdraw extends ContentEntityBase implements WithdrawInterface {
@@ -150,7 +150,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
     // 提现账户
     $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('所属账户'))
-      ->setSetting('target_type', 'finance_account')
+      ->setSetting('target_type', 'account')
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'entity_reference_label',
@@ -169,7 +169,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
     // 转账方式
     $fields['transfer_method'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('提现方式'))
-      ->setSetting('target_type', 'finance_transfer_method')
+      ->setSetting('target_type', 'account_transfer_method')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
         'label' => 'inline',

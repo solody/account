@@ -1,0 +1,19 @@
+name: Finance account
+type: module
+description: 'Provides finance accounting functionality.'
+core: 8.x
+package: Custom
+dependencies:
+  - drupal:basic_auth
+  - commerce:commerce_price
+  - dynamic_entity_reference:dynamic_entity_reference
+  - entity:entity
+  - account:account
+  - drupal:options
+  - drupal:rest
+  - drupal:serialization
+  - simple_oauth:simple_oauth
+  - state_machine:state_machine
+  - drupal:system
+  - drupal:user
+  - drupal:views

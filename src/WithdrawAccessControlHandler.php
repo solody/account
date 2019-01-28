@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,7 +10,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Withdraw entity.
  *
- * @see \Drupal\finance\Entity\Withdraw.
+ * @see \Drupal\account\Entity\Withdraw.
  */
 class WithdrawAccessControlHandler extends EntityAccessControlHandler {
 
@@ -18,7 +18,7 @@ class WithdrawAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    /** @var \Drupal\finance\Entity\WithdrawInterface $entity */
+    /** @var \Drupal\account\Entity\WithdrawInterface $entity */
     switch ($operation) {
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'view withdraw entities');

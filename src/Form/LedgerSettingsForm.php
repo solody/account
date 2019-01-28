@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class LedgerSettingsForm.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class LedgerSettingsForm extends FormBase {
 

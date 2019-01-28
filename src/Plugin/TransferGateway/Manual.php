@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\finance\Plugin\TransferGateway;
+namespace Drupal\account\Plugin\TransferGateway;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\finance\Entity\WithdrawInterface;
-use Drupal\finance\Plugin\TransferGatewayBase;
+use Drupal\account\Entity\WithdrawInterface;
+use Drupal\account\Plugin\TransferGatewayBase;
 use Drupal\entity\BundleFieldDefinition;
 
 /**

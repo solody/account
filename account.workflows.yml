@@ -1,6 +1,6 @@
 withdraw_default:
   id: withdraw_default
-  group: finance_withdraw
+  group: withdraw
   label: 'Withdraw Default'
   states:
     draft:

@@ -1,0 +1,2 @@
+exclude:
+  - account.account_transfer_gateway.alipay

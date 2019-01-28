@@ -1,29 +1,29 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\finance\Plugin\TransferGatewayManager;
+use Drupal\account\Plugin\TransferGatewayManager;
 
 /**
  * Defines the Transfer gateway entity.
  *
  * @ConfigEntityType(
- *   id = "finance_transfer_gateway",
+ *   id = "account_transfer_gateway",
  *   label = @Translation("Transfer gateway"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\TransferGatewayListBuilder",
+ *     "list_builder" = "Drupal\account\TransferGatewayListBuilder",
  *     "form" = {
- *       "add" = "Drupal\finance\Form\TransferGatewayForm",
- *       "edit" = "Drupal\finance\Form\TransferGatewayForm",
- *       "delete" = "Drupal\finance\Form\TransferGatewayDeleteForm"
+ *       "add" = "Drupal\account\Form\TransferGatewayForm",
+ *       "edit" = "Drupal\account\Form\TransferGatewayForm",
+ *       "delete" = "Drupal\account\Form\TransferGatewayDeleteForm"
  *     },
  *     "route_provider" = {
- *       "html" = "Drupal\finance\TransferGatewayHtmlRouteProvider",
+ *       "html" = "Drupal\account\TransferGatewayHtmlRouteProvider",
  *     },
  *   },
- *   config_prefix = "finance_transfer_gateway",
+ *   config_prefix = "account_transfer_gateway",
  *   admin_permission = "administer site configuration",
  *   entity_keys = {
  *     "id" = "id",
@@ -31,11 +31,11 @@ use Drupal\finance\Plugin\TransferGatewayManager;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_transfer_gateway/{finance_transfer_gateway}",
- *     "add-form" = "/admin/finance/finance_transfer_gateway/add",
- *     "edit-form" = "/admin/finance/finance_transfer_gateway/{finance_transfer_gateway}/edit",
- *     "delete-form" = "/admin/finance/finance_transfer_gateway/{finance_transfer_gateway}/delete",
- *     "collection" = "/admin/finance/finance_transfer_gateway"
+ *     "canonical" = "/admin/account/account_transfer_gateway/{account_transfer_gateway}",
+ *     "add-form" = "/admin/account/account_transfer_gateway/add",
+ *     "edit-form" = "/admin/account/account_transfer_gateway/{account_transfer_gateway}/edit",
+ *     "delete-form" = "/admin/account/account_transfer_gateway/{account_transfer_gateway}/delete",
+ *     "collection" = "/admin/account/account_transfer_gateway"
  *   }
  * )
  */

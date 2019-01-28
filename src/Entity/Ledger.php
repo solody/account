@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -12,28 +12,28 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Ledger entity.
  *
- * @ingroup finance
+ * @ingroup account
  *
  * @ContentEntityType(
- *   id = "finance_ledger",
+ *   id = "ledger",
  *   label = @Translation("Ledger"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\LedgerListBuilder",
- *     "views_data" = "Drupal\finance\Entity\LedgerViewsData",
+ *     "list_builder" = "Drupal\account\LedgerListBuilder",
+ *     "views_data" = "Drupal\account\Entity\LedgerViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\finance\Form\LedgerForm",
- *       "add" = "Drupal\finance\Form\LedgerForm",
- *       "edit" = "Drupal\finance\Form\LedgerForm",
- *       "delete" = "Drupal\finance\Form\LedgerDeleteForm",
+ *       "default" = "Drupal\account\Form\LedgerForm",
+ *       "add" = "Drupal\account\Form\LedgerForm",
+ *       "edit" = "Drupal\account\Form\LedgerForm",
+ *       "delete" = "Drupal\account\Form\LedgerDeleteForm",
  *     },
- *     "access" = "Drupal\finance\LedgerAccessControlHandler",
+ *     "access" = "Drupal\account\LedgerAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\finance\LedgerHtmlRouteProvider",
+ *       "html" = "Drupal\account\LedgerHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "finance_ledger",
+ *   base_table = "ledger",
  *   admin_permission = "administer ledger entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -42,13 +42,13 @@ use Drupal\user\UserInterface;
  *     "langcode" = "langcode",
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_ledger/{finance_ledger}",
- *     "add-form" = "/admin/finance/finance_ledger/add",
- *     "edit-form" = "/admin/finance/finance_ledger/{finance_ledger}/edit",
- *     "delete-form" = "/admin/finance/finance_ledger/{finance_ledger}/delete",
- *     "collection" = "/admin/finance/finance_ledger",
+ *     "canonical" = "/admin/account/ledger/{ledger}",
+ *     "add-form" = "/admin/account/ledger/add",
+ *     "edit-form" = "/admin/account/ledger/{ledger}/edit",
+ *     "delete-form" = "/admin/account/ledger/{ledger}/delete",
+ *     "collection" = "/admin/account/ledger",
  *   },
- *   field_ui_base_route = "finance_ledger.settings"
+ *   field_ui_base_route = "ledger.settings"
  * )
  */
 class Ledger extends ContentEntityBase implements LedgerInterface {
@@ -134,7 +134,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
     // 所属账户
     $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('所属账户'))
-      ->setSetting('target_type', 'finance_account')
+      ->setSetting('target_type', 'account')
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'entity_reference_label',

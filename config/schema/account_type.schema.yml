@@ -1,4 +1,4 @@
-finance.finance_account_type.*:
+account.account_type.*:
   type: config_entity
   label: 'Account type config'
   mapping:

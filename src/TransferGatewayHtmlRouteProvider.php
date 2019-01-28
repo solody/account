@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Routing\AdminHtmlRouteProvider;

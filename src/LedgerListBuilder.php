@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -9,7 +9,7 @@ use Drupal\Core\Link;
 /**
  * Defines a class to build a listing of Ledger entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class LedgerListBuilder extends EntityListBuilder {
 
@@ -27,12 +27,12 @@ class LedgerListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\finance\Entity\Ledger */
+    /* @var $entity \Drupal\account\Entity\Ledger */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),
-      'entity.finance_ledger.edit_form',
-      ['finance_ledger' => $entity->id()]
+      'entity.ledger.edit_form',
+      ['ledger' => $entity->id()]
     );
     return $row + parent::buildRow($entity);
   }

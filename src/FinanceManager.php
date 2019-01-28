@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\finance\Entity\Account;
-use Drupal\finance\Entity\AccountType;
-use Drupal\finance\Entity\Ledger;
+use Drupal\account\Entity\Account;
+use Drupal\account\Entity\AccountType;
+use Drupal\account\Entity\Ledger;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\finance\Entity\TransferMethod;
-use Drupal\finance\Entity\Withdraw;
+use Drupal\account\Entity\TransferMethod;
+use Drupal\account\Entity\Withdraw;
 use Drupal\user\Entity\User;
 
 /**
@@ -36,7 +36,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function getAccount(AccountInterface $user, $type) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_account')
+    $query = \Drupal::entityQuery('account')
       ->condition('user_id', $user->id())
       ->condition('type', $type);
     $ids = $query->execute();
@@ -155,7 +155,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function getLastLedger(Account $financeAccount) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_ledger')
+    $query = \Drupal::entityQuery('ledger')
       ->condition('account_id', $financeAccount->id())
       ->sort('id', 'DESC')
       ->range(0, 1);
@@ -218,7 +218,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function countPendingWithdrawTotalAmount(Account $account) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_withdraw')
+    $query = \Drupal::entityQuery('withdraw')
       ->condition('state', ['draft', 'processing'], 'IN')
       ->condition('account_id', $account->id());
     $ids = $query->execute();
@@ -245,7 +245,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function countCompleteWithdrawTotalAmount(Account $account) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_withdraw')
+    $query = \Drupal::entityQuery('withdraw')
       ->condition('state', 'completed')
       ->condition('account_id', $account->id());
     $ids = $query->execute();
@@ -298,7 +298,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function getLedgers(Account $account) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_ledger')
+    $query = \Drupal::entityQuery('ledger')
       ->condition('account_id', $account->id());
     $ids = $query->execute();
 
@@ -363,7 +363,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function hasProcessingWithdraw(Account $account) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_withdraw')
+    $query = \Drupal::entityQuery('withdraw')
       ->condition('account_id', $account->id())
       ->condition('state', ['draft', 'processing'], 'IN');
     $ids = $query->execute();
@@ -381,7 +381,7 @@ class FinanceManager implements FinanceManagerInterface {
    */
   public function getAccountsByType($type) {
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
-    $query = \Drupal::entityQuery('finance_account')
+    $query = \Drupal::entityQuery('account')
       ->condition('type', $type);
     $ids = $query->execute();
     if ($ids) return Account::loadMultiple($ids);

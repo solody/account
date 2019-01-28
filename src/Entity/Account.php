@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -13,29 +13,29 @@ use Drupal\user\UserInterface;
 /**
  * Defines the Account entity.
  *
- * @ingroup finance
+ * @ingroup account
  *
  * @ContentEntityType(
- *   id = "finance_account",
+ *   id = "account",
  *   label = @Translation("Account"),
  *   bundle_label = @Translation("Account type"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\AccountListBuilder",
- *     "views_data" = "Drupal\finance\Entity\AccountViewsData",
+ *     "list_builder" = "Drupal\account\AccountListBuilder",
+ *     "views_data" = "Drupal\account\Entity\AccountViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\finance\Form\AccountForm",
- *       "add" = "Drupal\finance\Form\AccountForm",
- *       "edit" = "Drupal\finance\Form\AccountForm",
- *       "delete" = "Drupal\finance\Form\AccountDeleteForm",
+ *       "default" = "Drupal\account\Form\AccountForm",
+ *       "add" = "Drupal\account\Form\AccountForm",
+ *       "edit" = "Drupal\account\Form\AccountForm",
+ *       "delete" = "Drupal\account\Form\AccountDeleteForm",
  *     },
- *     "access" = "Drupal\finance\AccountAccessControlHandler",
+ *     "access" = "Drupal\account\AccountAccessControlHandler",
  *     "route_provider" = {
- *       "html" = "Drupal\finance\AccountHtmlRouteProvider",
+ *       "html" = "Drupal\account\AccountHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "finance_account",
+ *   base_table = "account",
  *   admin_permission = "administer account entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -46,15 +46,15 @@ use Drupal\user\UserInterface;
  *     "langcode" = "langcode",
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_account/{finance_account}",
- *     "add-page" = "/admin/finance/finance_account/add",
- *     "add-form" = "/admin/finance/finance_account/add/{finance_account_type}",
- *     "edit-form" = "/admin/finance/finance_account/{finance_account}/edit",
- *     "delete-form" = "/admin/finance/finance_account/{finance_account}/delete",
- *     "collection" = "/admin/finance/finance_account",
+ *     "canonical" = "/admin/account/account/{account}",
+ *     "add-page" = "/admin/account/account/add",
+ *     "add-form" = "/admin/account/account/add/{account_type}",
+ *     "edit-form" = "/admin/account/account/{account}/edit",
+ *     "delete-form" = "/admin/account/account/{account}/delete",
+ *     "collection" = "/admin/account/account",
  *   },
- *   bundle_entity_type = "finance_account_type",
- *   field_ui_base_route = "entity.finance_account_type.edit_form"
+ *   bundle_entity_type = "account_type",
+ *   field_ui_base_route = "entity.account_type.edit_form"
  * )
  */
 class Account extends ContentEntityBase implements AccountInterface

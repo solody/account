@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Contains account.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_help().
+ */
+function account_help($route_name, RouteMatchInterface $route_match)
+{
+    switch ($route_name) {
+        // Main module help for the account module.
+        case 'help.page.account':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Provides finance functionality.') . '</p>';
+            return $output;
+
+        default:
+    }
+}
+
+/**
+ * Implements hook_install().
+ */
+function account_install()
+{
+    // 为已认证用户添加权限
+    user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, [
+        'add transfer method entities',
+        'edit transfer method entities',
+        'view transfer method entities',
+        'restful post account_apply_withdraw',
+        'restful get account_withdraw_limitation',
+    ]);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function account_theme()
+{
+    $theme['account'] = [
+        'render element' => 'elements',
+        'file' => 'account.page.inc',
+        'template' => 'account',
+    ];
+    $theme['account_content_add_list'] = [
+        'render element' => 'content',
+        'variables' => ['content' => NULL],
+        'file' => 'account.page.inc',
+    ];
+    return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function account_theme_suggestions_account(array $variables)
+{
+    $suggestions = [];
+    $entity = $variables['elements']['#account'];
+    $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+    $suggestions[] = 'account__' . $sanitized_view_mode;
+    $suggestions[] = 'account__' . $entity->bundle();
+    $suggestions[] = 'account__' . $entity->bundle() . '__' . $sanitized_view_mode;
+    $suggestions[] = 'account__' . $entity->id();
+    $suggestions[] = 'account__' . $entity->id() . '__' . $sanitized_view_mode;
+    return $suggestions;
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function account_views_data_alter(array &$data) {
+    $data['withdraw']['state']['filter']['id'] = 'state_machine_state';
+}

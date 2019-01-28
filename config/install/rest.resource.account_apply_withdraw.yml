@@ -1,14 +1,14 @@
-langcode: zh-hans
+langcode: en
 status: true
 dependencies:
   module:
     - basic_auth
-    - finance
+    - account
     - serialization
     - simple_oauth
     - user
-id: finance_apply_withdraw
-plugin_id: finance_apply_withdraw
+id: account_apply_withdraw
+plugin_id: account_apply_withdraw
 granularity: resource
 configuration:
   methods:

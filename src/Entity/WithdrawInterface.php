@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\commerce_price\Price;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -10,7 +10,7 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface for defining Withdraw entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterface {
 
@@ -30,7 +30,7 @@ interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterfa
    * @param string $name
    *   The Withdraw name.
    *
-   * @return \Drupal\finance\Entity\WithdrawInterface
+   * @return \Drupal\account\Entity\WithdrawInterface
    *   The called Withdraw entity.
    */
   public function setName($name);
@@ -50,7 +50,7 @@ interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterfa
    * @param string $transaction_number
    *   The Withdraw transaction_number.
    *
-   * @return \Drupal\finance\Entity\WithdrawInterface
+   * @return \Drupal\account\Entity\WithdrawInterface
    *   The called Withdraw entity.
    */
   public function setTransactionNumber($transaction_number);
@@ -69,7 +69,7 @@ interface WithdrawInterface extends ContentEntityInterface, EntityChangedInterfa
    * @param int $timestamp
    *   The Withdraw creation timestamp.
    *
-   * @return \Drupal\finance\Entity\WithdrawInterface
+   * @return \Drupal\account\Entity\WithdrawInterface
    *   The called Withdraw entity.
    */
   public function setCreatedTime($timestamp);

@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\finance\Plugin\rest\resource;
+namespace Drupal\account\Plugin\rest\resource;
 
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\finance\Entity\Account;
-use Drupal\finance\Entity\AccountType;
-use Drupal\finance\FinanceManagerInterface;
+use Drupal\account\Entity\Account;
+use Drupal\account\Entity\AccountType;
+use Drupal\account\FinanceManagerInterface;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
@@ -17,10 +17,10 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  * Provides a resource to get view modes by entity and bundle.
  *
  * @RestResource(
- *   id = "finance_withdraw_limitation",
+ *   id = "account_withdraw_limitation",
  *   label = @Translation("Withdraw limitation"),
  *   uri_paths = {
- *     "canonical" = "/api/rest/finance/withdraw-limitation/{finance_account}"
+ *     "canonical" = "/api/rest/account/withdraw-limitation/{account}"
  *   }
  * )
  */
@@ -35,9 +35,9 @@ class WithdrawLimitation extends ResourceBase
     protected $currentUser;
 
     /**
-     * Drupal\finance\FinanceManagerInterface definition.
+     * Drupal\account\FinanceManagerInterface definition.
      *
-     * @var \Drupal\finance\FinanceManagerInterface
+     * @var \Drupal\account\FinanceManagerInterface
      */
     protected $financeManager;
 
@@ -83,9 +83,9 @@ class WithdrawLimitation extends ResourceBase
             $plugin_id,
             $plugin_definition,
             $container->getParameter('serializer.formats'),
-            $container->get('logger.factory')->get('finance'),
+            $container->get('logger.factory')->get('account'),
             $container->get('current_user'),
-            $container->get('finance.finance_manager')
+            $container->get('account.finance_manager')
         );
     }
 
@@ -133,7 +133,7 @@ class WithdrawLimitation extends ResourceBase
     {
         $route = parent::getBaseRoute($canonical_path, $method);
         $parameters = $route->getOption('parameters') ?: [];
-        $parameters['finance_account']['type'] = 'entity:finance_account';
+        $parameters['account']['type'] = 'entity:account';
         $route->setOption('parameters', $parameters);
 
         return $route;

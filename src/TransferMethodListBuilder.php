@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -9,7 +9,7 @@ use Drupal\Core\Link;
 /**
  * Defines a class to build a listing of Transfer method entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class TransferMethodListBuilder extends EntityListBuilder {
 
@@ -27,12 +27,12 @@ class TransferMethodListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\finance\Entity\TransferMethod */
+    /* @var $entity \Drupal\account\Entity\TransferMethod */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),
-      'entity.finance_transfer_method.edit_form',
-      ['finance_transfer_method' => $entity->id()]
+      'entity.account_transfer_method.edit_form',
+      ['account_transfer_method' => $entity->id()]
     );
     return $row + parent::buildRow($entity);
   }

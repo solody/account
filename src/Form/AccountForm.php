@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for Account edit forms.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class AccountForm extends ContentEntityForm {
 
@@ -16,7 +16,7 @@ class AccountForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\finance\Entity\Account */
+    /* @var $entity \Drupal\account\Entity\Account */
     $form = parent::buildForm($form, $form_state);
 
     $entity = $this->entity;
@@ -44,7 +44,7 @@ class AccountForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.finance_account.canonical', ['finance_account' => $entity->id()]);
+    $form_state->setRedirect('entity.account.canonical', ['account' => $entity->id()]);
   }
 
 }

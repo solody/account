@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\commerce_price\Plugin\Field\FieldType\PriceItem;
 use Drupal\commerce_price\Price;
@@ -11,7 +11,7 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface for defining Ledger entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 interface LedgerInterface extends ContentEntityInterface, EntityChangedInterface {
 
@@ -31,7 +31,7 @@ interface LedgerInterface extends ContentEntityInterface, EntityChangedInterface
    * @param int $timestamp
    *   The Ledger creation timestamp.
    *
-   * @return \Drupal\finance\Entity\LedgerInterface
+   * @return \Drupal\account\Entity\LedgerInterface
    *   The called Ledger entity.
    */
   public function setCreatedTime($timestamp);

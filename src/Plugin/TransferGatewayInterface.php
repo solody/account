@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\finance\Plugin;
+namespace Drupal\account\Plugin;
 
 use Drupal\entity\BundlePlugin\BundlePluginInterface;
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Plugin\PluginWithFormsInterface;
-use Drupal\finance\Entity\WithdrawInterface;
+use Drupal\account\Entity\WithdrawInterface;
 
 /**
  * Defines an interface for Transfer gateway plugins.

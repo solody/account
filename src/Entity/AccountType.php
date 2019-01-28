@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
 
@@ -8,34 +8,34 @@ use Drupal\Core\Config\Entity\ConfigEntityBundleBase;
  * Defines the Account type entity.
  *
  * @ConfigEntityType(
- *   id = "finance_account_type",
+ *   id = "account_type",
  *   label = @Translation("Account type"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\finance\AccountTypeListBuilder",
+ *     "list_builder" = "Drupal\account\AccountTypeListBuilder",
  *     "form" = {
- *       "add" = "Drupal\finance\Form\AccountTypeForm",
- *       "edit" = "Drupal\finance\Form\AccountTypeForm",
- *       "delete" = "Drupal\finance\Form\AccountTypeDeleteForm"
+ *       "add" = "Drupal\account\Form\AccountTypeForm",
+ *       "edit" = "Drupal\account\Form\AccountTypeForm",
+ *       "delete" = "Drupal\account\Form\AccountTypeDeleteForm"
  *     },
  *     "route_provider" = {
- *       "html" = "Drupal\finance\AccountTypeHtmlRouteProvider",
+ *       "html" = "Drupal\account\AccountTypeHtmlRouteProvider",
  *     },
  *   },
- *   config_prefix = "finance_account_type",
+ *   config_prefix = "account_type",
  *   admin_permission = "administer site configuration",
- *   bundle_of = "finance_account",
+ *   bundle_of = "account",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label",
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/admin/finance/finance_account_type/{finance_account_type}",
- *     "add-form" = "/admin/finance/finance_account_type/add",
- *     "edit-form" = "/admin/finance/finance_account_type/{finance_account_type}/edit",
- *     "delete-form" = "/admin/finance/finance_account_type/{finance_account_type}/delete",
- *     "collection" = "/admin/finance/finance_account_type"
+ *     "canonical" = "/admin/account/account_type/{account_type}",
+ *     "add-form" = "/admin/account/account_type/add",
+ *     "edit-form" = "/admin/account/account_type/{account_type}/edit",
+ *     "delete-form" = "/admin/account/account_type/{account_type}/delete",
+ *     "collection" = "/admin/account/account_type"
  *   }
  * )
  */

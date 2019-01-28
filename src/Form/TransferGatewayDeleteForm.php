@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\EntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -22,7 +22,7 @@ class TransferGatewayDeleteForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.finance_transfer_gateway.collection');
+    return new Url('entity.account_transfer_gateway.collection');
   }
 
   /**

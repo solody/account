@@ -1,0 +1,12 @@
+services:
+  plugin.manager.transfer_gateway:
+    class: Drupal\account\Plugin\TransferGatewayManager
+    parent: default_plugin_manager
+  account.finance_manager:
+    class: Drupal\account\FinanceManager
+    arguments: ['@entity_type.manager']
+  account.withdraw_subscriber:
+    class: Drupal\account\EventSubscriber\WithdrawSubscriber
+    arguments: ['@account.finance_manager']
+    tags:
+      - { name: event_subscriber }

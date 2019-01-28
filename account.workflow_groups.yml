@@ -1,0 +1,3 @@
+withdraw:
+  label: Withdraw
+  entity_type: withdraw

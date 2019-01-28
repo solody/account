@@ -2,26 +2,26 @@
 
 /**
  * @file
- * Contains finance_ledger.page.inc.
+ * Contains withdraw.page.inc.
  *
- * Page callback for Ledger entities.
+ * Page callback for Withdraw entities.
  */
 
 use Drupal\Core\Render\Element;
 
 /**
- * Prepares variables for Ledger templates.
+ * Prepares variables for Withdraw templates.
  *
- * Default template: finance_ledger.html.twig.
+ * Default template: withdraw.html.twig.
  *
  * @param array $variables
  *   An associative array containing:
  *   - elements: An associative array containing the user information and any
  *   - attributes: HTML attributes for the containing element.
  */
-function template_preprocess_finance_ledger(array &$variables) {
-  // Fetch Ledger Entity Object.
-  $finance_ledger = $variables['elements']['#finance_ledger'];
+function template_preprocess_withdraw(array &$variables) {
+  // Fetch Withdraw Entity Object.
+  $withdraw = $variables['elements']['#withdraw'];
 
   // Helpful $content variable for templates.
   foreach (Element::children($variables['elements']) as $key) {

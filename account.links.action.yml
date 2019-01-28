@@ -1,0 +1,12 @@
+entity.account_type.add_form:
+  route_name: entity.account_type.add_form
+  title: 'Add Account type'
+  appears_on:
+    - entity.account_type.collection
+
+entity.account_transfer_gateway.add_form:
+  route_name: entity.account_transfer_gateway.add_form
+  title: 'Add Transfer gateway'
+  appears_on:
+    - entity.account_transfer_gateway.collection
+

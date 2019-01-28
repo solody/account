@@ -1,16 +1,16 @@
-langcode: zh-hans
+langcode: en
 status: true
 dependencies:
   module:
-    - finance
+    - account
     - rest
     - serialization
-id: api_finance_transfer_methods
-label: 'Api Finance Transfer Methods'
+id: api_withdraws
+label: 'Api Finance Withdraws'
 module: views
 description: ''
 tag: ''
-base_table: finance_transfer_method
+base_table: withdraw
 base_field: id
 core: 8.x
 display:
@@ -24,7 +24,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -73,7 +73,7 @@ display:
           default_field_elements: true
       fields:
         name:
-          table: finance_transfer_method
+          table: withdraw
           field: name
           id: name
           entity_type: null
@@ -136,18 +136,93 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-      filters: {  }
-      sorts: {  }
+      filters:
+        created:
+          id: created
+          table: withdraw
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: between
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: created_op
+            label: 申请时间
+            description: ''
+            use_operator: false
+            operator: created_op
+            identifier: created
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              distributor: '0'
+              administrator: '0'
+              supplier: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: withdraw
+          entity_field: created
+          plugin_id: date
+      sorts:
+        created:
+          id: created
+          table: withdraw
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          entity_type: withdraw
+          entity_field: created
+          plugin_id: date
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        account_id:
+          id: account_id
+          table: withdraw
+          field: account_id
+          relationship: none
+          group_type: group
+          admin_label: Account
+          required: false
+          entity_type: withdraw
+          entity_field: account_id
+          plugin_id: standard
       arguments:
         user_id:
           id: user_id
-          table: finance_transfer_method
+          table: account
           field: user_id
-          relationship: none
+          relationship: account_id
           group_type: group
           admin_label: ''
           default_action: empty
@@ -177,7 +252,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          entity_type: finance_transfer_method
+          entity_type: account
           entity_field: user_id
           plugin_id: numeric
       display_extenders: {  }
@@ -197,7 +272,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: api/rest/views/finance/transfer-methods/%user_id
+      path: api/rest/views/finance/withdraws/%user_id
       pager:
         type: full
         options:

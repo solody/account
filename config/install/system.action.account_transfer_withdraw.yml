@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - account
+id: account_transfer_withdraw
+label: 转账
+type: withdraw
+plugin: account_transfer_withdraw
+configuration: {  }

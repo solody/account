@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
@@ -9,7 +9,7 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface for defining Transfer method entities.
  *
- * @ingroup finance
+ * @ingroup account
  */
 interface TransferMethodInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface {
 
@@ -29,7 +29,7 @@ interface TransferMethodInterface extends ContentEntityInterface, EntityChangedI
    * @param string $name
    *   The Transfer method name.
    *
-   * @return \Drupal\finance\Entity\TransferMethodInterface
+   * @return \Drupal\account\Entity\TransferMethodInterface
    *   The called Transfer method entity.
    */
   public function setName($name);
@@ -48,7 +48,7 @@ interface TransferMethodInterface extends ContentEntityInterface, EntityChangedI
    * @param int $timestamp
    *   The Transfer method creation timestamp.
    *
-   * @return \Drupal\finance\Entity\TransferMethodInterface
+   * @return \Drupal\account\Entity\TransferMethodInterface
    *   The called Transfer method entity.
    */
   public function setCreatedTime($timestamp);

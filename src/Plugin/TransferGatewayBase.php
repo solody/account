@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Plugin;
+namespace Drupal\account\Plugin;
 
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Component\Utility\NestedArray;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Entity;
+namespace Drupal\account\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
@@ -13,7 +13,7 @@ interface TransferGatewayInterface extends ConfigEntityInterface {
   /**
    * Gets the payment gateway plugin.
    *
-   * @return \Drupal\finance\Plugin\TransferGatewayInterface
+   * @return \Drupal\account\Plugin\TransferGatewayInterface
    *   The payment gateway plugin.
    */
   public function getPlugin();

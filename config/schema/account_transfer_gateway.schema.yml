@@ -1,4 +1,4 @@
-finance.finance_transfer_gateway.*:
+account.account_transfer_gateway.*:
   type: config_entity
   label: 'Transfer gateway config'
   mapping:
@@ -12,9 +12,9 @@ finance.finance_transfer_gateway.*:
       type: string
       label: 'Plugin'
     configuration:
-      type: finance.finance_transfer_gateway.plugin.[%parent.plugin]
+      type: account.account_transfer_gateway.plugin.[%parent.plugin]
     uuid:
       type: string
 
-finance.finance_transfer_gateway.plugin.manual:
+account.account_transfer_gateway.plugin.manual:
   type: mapping

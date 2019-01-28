@@ -1,4 +1,4 @@
-# commerce_finance
+# Finance account
 
 本模块提供简单的财务管理功能：
 

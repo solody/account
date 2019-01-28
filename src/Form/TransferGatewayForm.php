@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\finance\Plugin\TransferGatewayManager;
+use Drupal\account\Plugin\TransferGatewayManager;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -18,7 +18,7 @@ class TransferGatewayForm extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    /** @var \Drupal\finance\Entity\TransferGatewayInterface $gateway */
+    /** @var \Drupal\account\Entity\TransferGatewayInterface $gateway */
     $gateway = $this->entity;
     /** @var TransferGatewayManager $plugin_manager */
     $plugin_manager = \Drupal::service('plugin.manager.transfer_gateway');
@@ -55,7 +55,7 @@ class TransferGatewayForm extends EntityForm {
       '#type' => 'machine_name',
       '#default_value' => $gateway->id(),
       '#machine_name' => [
-        'exists' => '\Drupal\finance\Entity\TransferGateway::load',
+        'exists' => '\Drupal\account\Entity\TransferGateway::load',
       ],
       '#disabled' => !$gateway->isNew(),
     ];
@@ -106,22 +106,22 @@ class TransferGatewayForm extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    $finance_transfer_gateway = $this->entity;
-    $status = $finance_transfer_gateway->save();
+    $transfer_gateway = $this->entity;
+    $status = $transfer_gateway->save();
 
     switch ($status) {
       case SAVED_NEW:
         drupal_set_message($this->t('Created the %label Transfer gateway.', [
-          '%label' => $finance_transfer_gateway->label(),
+          '%label' => $transfer_gateway->label(),
         ]));
         break;
 
       default:
         drupal_set_message($this->t('Saved the %label Transfer gateway.', [
-          '%label' => $finance_transfer_gateway->label(),
+          '%label' => $transfer_gateway->label(),
         ]));
     }
-    $form_state->setRedirectUrl($finance_transfer_gateway->toUrl('collection'));
+    $form_state->setRedirectUrl($transfer_gateway->toUrl('collection'));
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for Withdraw edit forms.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class WithdrawForm extends ContentEntityForm {
 
@@ -16,7 +16,7 @@ class WithdrawForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\finance\Entity\Withdraw */
+    /* @var $entity \Drupal\account\Entity\Withdraw */
     $form = parent::buildForm($form, $form_state);
 
     $entity = $this->entity;
@@ -44,7 +44,7 @@ class WithdrawForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.finance_withdraw.canonical', ['finance_withdraw' => $entity->id()]);
+    $form_state->setRedirect('entity.withdraw.canonical', ['withdraw' => $entity->id()]);
   }
 
 }

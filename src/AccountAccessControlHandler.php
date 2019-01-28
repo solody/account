@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,7 +10,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Account entity.
  *
- * @see \Drupal\finance\Entity\Account.
+ * @see \Drupal\account\Entity\Account.
  */
 class AccountAccessControlHandler extends EntityAccessControlHandler {
 
@@ -18,7 +18,7 @@ class AccountAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    /** @var \Drupal\finance\Entity\AccountInterface $entity */
+    /** @var \Drupal\account\Entity\AccountInterface $entity */
     switch ($operation) {
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'view account entities');

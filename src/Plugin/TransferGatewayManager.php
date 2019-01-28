@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Plugin;
+namespace Drupal\account\Plugin;
 
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
@@ -24,10 +24,10 @@ class TransferGatewayManager extends DefaultPluginManager {
    *   The module handler to invoke the alter hook with.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler) {
-    parent::__construct('Plugin/TransferGateway', $namespaces, $module_handler, 'Drupal\finance\Plugin\TransferGatewayInterface', 'Drupal\finance\Annotation\TransferGateway');
+    parent::__construct('Plugin/TransferGateway', $namespaces, $module_handler, 'Drupal\account\Plugin\TransferGatewayInterface', 'Drupal\account\Annotation\TransferGateway');
 
-    $this->alterInfo('finance_transfer_gateway_info');
-    $this->setCacheBackend($cache_backend, 'finance_transfer_gateway_plugins');
+    $this->alterInfo('account_transfer_gateway_info');
+    $this->setCacheBackend($cache_backend, 'account_transfer_gateway_plugins');
   }
 
 }

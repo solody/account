@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance;
+namespace Drupal\account;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,7 +10,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Transfer method entity.
  *
- * @see \Drupal\finance\Entity\TransferMethod.
+ * @see \Drupal\account\Entity\TransferMethod.
  */
 class TransferMethodAccessControlHandler extends EntityAccessControlHandler {
 
@@ -18,7 +18,7 @@ class TransferMethodAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    /** @var \Drupal\finance\Entity\TransferMethodInterface $entity */
+    /** @var \Drupal\account\Entity\TransferMethodInterface $entity */
     switch ($operation) {
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'view transfer method entities');

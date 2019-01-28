@@ -1,14 +1,14 @@
-langcode: zh-hans
+langcode: en
 status: true
 dependencies:
   module:
     - basic_auth
-    - finance
+    - account
     - serialization
     - simple_oauth
     - user
-id: entity.finance_transfer_method
-plugin_id: 'entity:finance_transfer_method'
+id: entity.account_transfer_method
+plugin_id: 'entity:account_transfer_method'
 granularity: resource
 configuration:
   methods:

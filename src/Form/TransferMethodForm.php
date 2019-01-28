@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\finance\Form;
+namespace Drupal\account\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Form controller for Transfer method edit forms.
  *
- * @ingroup finance
+ * @ingroup account
  */
 class TransferMethodForm extends ContentEntityForm {
 
@@ -16,7 +16,7 @@ class TransferMethodForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\finance\Entity\TransferMethod */
+    /* @var $entity \Drupal\account\Entity\TransferMethod */
     $form = parent::buildForm($form, $form_state);
 
     $entity = $this->entity;
@@ -44,7 +44,7 @@ class TransferMethodForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.finance_transfer_method.canonical', ['finance_transfer_method' => $entity->id()]);
+    $form_state->setRedirect('entity.account_transfer_method.canonical', ['account_transfer_method' => $entity->id()]);
   }
 
 }

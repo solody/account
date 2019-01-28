@@ -1,23 +1,23 @@
-finance.admin:
-  path: '/admin/finance'
+account.admin:
+  path: '/admin/account'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: '财务'
   requirements:
-    _permission: 'access finance administration pages'
+    _permission: 'access account administration pages'
 
-finance.admin.config:
-  path: '/admin/finance/config'
+account.admin.config:
+  path: '/admin/account/config'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: '配置'
   requirements:
-    _permission: 'access finance administration pages'
+    _permission: 'access account administration pages'
 
-finance.finance_apply_withdraw_form:
-  path: '/admin/finance/form/apply_withdraw/{finance_account}'
+account.account_apply_withdraw_form:
+  path: '/admin/account/form/apply_withdraw/{account}'
   defaults:
-    _form: '\Drupal\finance\Form\ApplyWithdrawForm'
+    _form: '\Drupal\account\Form\ApplyWithdrawForm'
     _title: '申请提现'
   requirements:
     _permission: 'apply withdraw for own finance account'
