@@ -26,6 +26,13 @@ function account_help($route_name, RouteMatchInterface $route_match)
 }
 
 /**
+ * Implements hook_toolbar_alter().
+ */
+function account_toolbar_alter(&$items) {
+  $items['administration']['#attached']['library'][] = 'account/toolbar';
+}
+
+/**
  * Implements hook_install().
  */
 function account_install()

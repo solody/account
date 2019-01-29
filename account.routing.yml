@@ -2,7 +2,7 @@ account.admin:
   path: '/admin/account'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: '财务'
+    _title: 'Finance'
   requirements:
     _permission: 'access account administration pages'
 
@@ -10,7 +10,7 @@ account.admin.config:
   path: '/admin/account/config'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: '配置'
+    _title: 'Configuration'
   requirements:
     _permission: 'access account administration pages'
 
@@ -18,7 +18,7 @@ account.account_apply_withdraw_form:
   path: '/admin/account/form/apply_withdraw/{account}'
   defaults:
     _form: '\Drupal\account\Form\ApplyWithdrawForm'
-    _title: '申请提现'
+    _title: 'Apply withdraw'
   requirements:
     _permission: 'apply withdraw for own finance account'
   

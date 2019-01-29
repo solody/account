@@ -21,7 +21,7 @@ class TransferGatewayForm extends EntityForm {
     /** @var \Drupal\account\Entity\TransferGatewayInterface $gateway */
     $gateway = $this->entity;
     /** @var TransferGatewayManager $plugin_manager */
-    $plugin_manager = \Drupal::service('plugin.manager.transfer_gateway');
+    $plugin_manager = \Drupal::service('plugin.manager.account_transfer_gateway');
     $plugins = array_column($plugin_manager->getDefinitions(), 'label', 'id');
     asort($plugins);
 
@@ -76,7 +76,7 @@ class TransferGatewayForm extends EntityForm {
     ];
     $form['configuration'] = [
       '#type' => 'commerce_plugin_configuration',
-      '#plugin_type' => 'transfer_gateway',
+      '#plugin_type' => 'account_transfer_gateway',
       '#plugin_id' => $plugin,
       '#default_value' => $plugin_configuration,
     ];

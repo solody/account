@@ -1,12 +1,12 @@
 account.admin_root:
-  title: '财务'
+  title: 'Finance'
   route_name: 'account.admin'
   parent: 'system.admin'
   weight: -10
 
 
 account.admin_root.config:
-  title: '配置'
+  title: 'Configuration'
   route_name: 'account.admin.config'
   parent: 'account.admin_root'
   weight: 999
@@ -17,18 +17,6 @@ entity.account_type.collection:
   description: 'List Account type (bundles)'
   parent: account.admin_root.config
   weight: 1
-
-account_transfer_method.admin.structure.settings:
-  title: 'Transfer method settings'
-  description: 'Configure Transfer method entities'
-  route_name: account_transfer_method.settings
-  parent: account.admin_root.config
-
-withdraw.admin.structure.settings:
-  title: 'Withdraw settings'
-  description: 'Configure Withdraw entities'
-  route_name: withdraw.settings
-  parent: account.admin_root.config
 
 entity.account_transfer_gateway.collection:
   title: 'Transfer gateway'
@@ -41,20 +29,20 @@ entity.account_transfer_gateway.collection:
 
 
 entity.account.collection:
-  title: '账户管理'
+  title: 'Account list'
   route_name: entity.account.collection
   parent: account.admin_root
   weight: 100
 
 entity.account_transfer_method.collection:
-  title: '转账方法管理'
+  title: 'Transfer method list'
   route_name: entity.account_transfer_method.collection
-  description: '管理用户创建的转帐方法，每个转账方法都是特定网关的具体转账账号。'
+  description: 'Manage transfer methods that created by users, each transfer method configured in different transfer account information.'
   parent: account.admin_root
   weight: 100
 
 entity.withdraw.collection:
-  title: '提现单管理'
+  title: 'Withdraw list'
   route_name: view.withdraw_admin.page_1
   route_parameters: { account_type: 'all' }
   parent: account.admin_root

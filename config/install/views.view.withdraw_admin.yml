@@ -7,7 +7,7 @@ dependencies:
     - options
     - state_machine
 id: withdraw_admin
-label: 提现管理
+label: 'Withdraw list'
 module: views
 description: ''
 tag: ''

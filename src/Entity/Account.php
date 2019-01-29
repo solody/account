@@ -210,7 +210,7 @@ class Account extends ContentEntityBase implements AccountInterface
 
         // 账户所属用户
         $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-            ->setLabel(t('账户所属用户'))
+            ->setLabel(t('Owner'))
             ->setSetting('target_type', 'user')
             ->setSetting('handler', 'default')
             ->setDisplayOptions('view', [
@@ -221,7 +221,7 @@ class Account extends ContentEntityBase implements AccountInterface
 
         // 账户名称
         $fields['name'] = BaseFieldDefinition::create('string')
-            ->setLabel(t('账户名称'))
+            ->setLabel(t('Account name'))
             ->setDefaultValue('')
             ->setDisplayOptions('view', [
                 'label' => 'inline',
@@ -235,7 +235,7 @@ class Account extends ContentEntityBase implements AccountInterface
 
         // 账户进项累计（借记）
         $fields['total_debit'] = BaseFieldDefinition::create('commerce_price')
-            ->setLabel(t('账户进项累计'))
+            ->setLabel(t('Total debit'))
             ->setDisplayOptions('view', [
                 'label' => 'inline',
                 'type' => 'commerce_price_default',
@@ -246,7 +246,7 @@ class Account extends ContentEntityBase implements AccountInterface
 
         // 账户出项累计（贷记）
         $fields['total_credit'] = BaseFieldDefinition::create('commerce_price')
-            ->setLabel(t('账户出项累计'))
+            ->setLabel(t('Total credit'))
             ->setDisplayOptions('view', [
                 'label' => 'inline',
                 'type' => 'commerce_price_default',
@@ -255,7 +255,7 @@ class Account extends ContentEntityBase implements AccountInterface
 
         // 账户余额
         $fields['balance'] = BaseFieldDefinition::create('commerce_price')
-            ->setLabel(t('账户余额'))
+            ->setLabel(t('Balance'))
             ->setDisplayOptions('view', [
                 'label' => 'inline',
                 'type' => 'commerce_price_default',
@@ -263,7 +263,7 @@ class Account extends ContentEntityBase implements AccountInterface
             ]);
 
         $fields['created'] = BaseFieldDefinition::create('created')
-            ->setLabel(t('创建时间'))
+            ->setLabel(t('Created'))
             ->setDisplayOptions('view', [
                 'label' => 'inline',
                 'type' => 'timestamp',
@@ -271,7 +271,7 @@ class Account extends ContentEntityBase implements AccountInterface
             ]);
 
         $fields['changed'] = BaseFieldDefinition::create('changed')
-            ->setLabel(t('更新时间'))
+            ->setLabel(t('Changed'))
             ->setDisplayOptions('view', [
                 'label' => 'inline',
                 'type' => 'timestamp',

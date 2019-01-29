@@ -10,12 +10,12 @@ account.account_type.*:
       label: 'Label'
     withdraw_period:
       type: integer
-      label: '提现周期'
+      label: 'Withdraw period'
     minimum_withdraw:
       type: float
-      label: '单笔最小提现限额'
+      label: 'Minimum withdraw limitation'
     maximum_withdraw:
       type: float
-      label: '单笔最大提现限额'
+      label: 'Maximum withdraw limitation'
     uuid:
       type: string

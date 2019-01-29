@@ -43,14 +43,14 @@ class AccountTypeForm extends EntityForm
 
         $form['withdraw_period'] = array(
             '#type' => 'number',
-            '#title' => $this->t('结算周期(天)'),
+            '#title' => $this->t('Withdraw period(days)'),
             '#min' => 0,
             '#default_value' => $account_type->getWithdrawPeriod(),
         );
 
         $form['minimum_withdraw'] = array(
             '#type' => 'number',
-            '#title' => $this->t('最小提现限额'),
+            '#title' => $this->t('Minimum withdraw limitation'),
             '#min' => 0,
             '#step' => 0.01,
             '#default_value' => $account_type->getMinimumWithdraw(),
@@ -58,7 +58,7 @@ class AccountTypeForm extends EntityForm
 
         $form['maximum_withdraw'] = array(
             '#type' => 'number',
-            '#title' => $this->t('最大提现限额'),
+            '#title' => $this->t('Maximum withdraw limitation'),
             '#min' => 0,
             '#step' => 0.01,
             '#default_value' => $account_type->getMaximumWithdraw(),
