@@ -11,6 +11,6 @@
     "source": "http://cgit.drupalcode.org/account"
   },
   "require": {
-    "drupal/dynamic_entity_reference": "^1.5"
+    "drupal/dynamic_entity_reference": "^1.7"
   }
 }

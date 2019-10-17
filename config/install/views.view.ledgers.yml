@@ -4,7 +4,7 @@ dependencies:
   module:
     - commerce_price
     - dynamic_entity_reference
-    - finance
+    - account
 id: ledgers
 label: 记账账户流水
 module: views

@@ -34,7 +34,7 @@ class AccountTypeForm extends EntityForm
             '#type' => 'machine_name',
             '#default_value' => $account_type->id(),
             '#machine_name' => [
-                'exists' => '\Drupal\finance\Entity\AccountType::load',
+                'exists' => '\Drupal\account\Entity\AccountType::load',
             ],
             '#disabled' => !$account_type->isNew(),
         ];
