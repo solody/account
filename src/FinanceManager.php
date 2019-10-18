@@ -59,6 +59,8 @@ class FinanceManager implements FinanceManagerInterface {
     $remarks = '',
     $source = null) {
 
+    \Drupal::moduleHandler()->alter('account_ledger_remarks', $remarks, $source);
+
     // 使用操作锁，防止并发操作造成数据计算错误
     $lock = \Drupal::lock();
     $operationID = 'finance__create_ledger__' . $financeAccount->id();
