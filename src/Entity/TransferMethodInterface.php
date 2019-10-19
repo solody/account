@@ -63,4 +63,15 @@ interface TransferMethodInterface extends ContentEntityInterface, EntityChangedI
    * @return TransferGatewayInterface
    */
   public function getTransferGateway();
+
+  /**
+   * @return boolean
+   */
+  public function isDefault();
+
+  /**
+   * @param $value boolean
+   * @return $this
+   */
+  public function setDefault($value);
 }

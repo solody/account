@@ -256,6 +256,10 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
         'type' => 'string'
       ]);
 
+    $fields['notice'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Need notice the owner.'))
+      ->setDefaultValue(true);
+
     // 申请时间
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('申请时间'))

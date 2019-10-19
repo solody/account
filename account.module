@@ -37,7 +37,10 @@ function account_install()
     'view transfer method entities',
     'restful post account_apply_withdraw',
     'restful get account_withdraw_limitation',
-    'view ledger entities'
+    'view ledger entities',
+    'edit ledger entities',
+    'view withdraw entities',
+    'edit withdraw entities'
   ]);
 }
 

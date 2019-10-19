@@ -184,6 +184,10 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
         'type' => 'dynamic_entity_reference_label'
       ]);
 
+    $fields['notice'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Need notice the owner.'))
+      ->setDefaultValue(true);
+
     // 发生时间
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('发生时间'))

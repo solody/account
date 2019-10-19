@@ -21,7 +21,7 @@ use Drupal\user\UserInterface;
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\account\TransferMethodListBuilder",
  *     "views_data" = "Drupal\account\Entity\TransferMethodViewsData",
- *
+ *     "storage" = "Drupal\account\TransferMethodStorage",
  *     "form" = {
  *       "default" = "Drupal\account\Form\TransferMethodForm",
  *       "add" = "Drupal\account\Form\TransferMethodForm",
@@ -141,6 +141,16 @@ class TransferMethod extends ContentEntityBase implements TransferMethodInterfac
     return $this->get('transfer_gateway')->entity;
   }
 
+  public function isDefault() {
+    return (boolean)$this->is_default->value;
+  }
+
+  public function setDefault($value)
+  {
+    $this->set('is_default', (boolean)$value);
+    return $this;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -176,6 +186,10 @@ class TransferMethod extends ContentEntityBase implements TransferMethodInterfac
         'label' => 'inline',
         'type' => 'entity_reference_label'
       ]);
+
+    $fields['is_default'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Default transfer method.'))
+      ->setDefaultValue(false);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
