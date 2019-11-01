@@ -19,8 +19,12 @@
     {% if title %}
       <h4>{{- title -}}</h4>
     {% endif %}
-    {% if detail_link %}
-        <div style="text-align: right;"><div class="button">{{- detail_link -}}</div></div>
+    {% if links %}
+      <div style="text-align: right;">
+      {% for link in links %}
+        <div class="button">{{- link -}}</div>
+      {% endfor %}
+      </div>
     {% endif %}
   {% if table %}
       {{- table -}}

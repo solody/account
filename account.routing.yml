@@ -21,4 +21,11 @@ account.account_apply_withdraw_form:
     _title: '申请提现'
   requirements:
     _permission: 'apply withdraw for own finance account'
-  
+
+account.manual_add_account_ledger_form:
+  path: '/admin/account/form/manual_add_account_ledger/{account_id}'
+  defaults:
+    _form: '\Drupal\account\Form\ManualAddAccountLedgerForm'
+    _title: '手动调整余额'
+  requirements:
+    _access: 'TRUE'
