@@ -40,7 +40,8 @@ function account_install()
     'view ledger entities',
     'edit ledger entities',
     'view withdraw entities',
-    'edit withdraw entities'
+    'edit withdraw entities',
+    'apply withdraw for own finance account'
   ]);
 }
 
