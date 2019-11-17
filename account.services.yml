@@ -1,5 +1,5 @@
 services:
-  plugin.manager.transfer_gateway:
+  plugin.manager.account_transfer_gateway:
     class: Drupal\account\Plugin\TransferGatewayManager
     parent: default_plugin_manager
   account.finance_manager:

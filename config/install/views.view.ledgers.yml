@@ -6,7 +6,7 @@ dependencies:
     - dynamic_entity_reference
     - account
 id: ledgers
-label: 记账账户流水
+label: 'Account ledgers'
 module: views
 description: ''
 tag: ''

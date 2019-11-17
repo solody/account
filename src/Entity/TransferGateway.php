@@ -74,7 +74,7 @@ class TransferGateway extends ConfigEntityBase implements TransferGatewayInterfa
    */
   public function getPlugin() {
     /** @var TransferGatewayManager $plugin_manager */
-    $plugin_manager = \Drupal::service('plugin.manager.transfer_gateway');
+    $plugin_manager = \Drupal::service('plugin.manager.account_transfer_gateway');
     return $plugin_manager->createInstance($this->plugin, $this->configuration);
   }
 

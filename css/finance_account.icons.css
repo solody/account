@@ -1,0 +1,20 @@
+/**
+ * @file
+ * Finance toolbar icon styling.
+ */
+
+/* Bar styling (first row), currently unused. */
+.toolbar-bar .toolbar-icon-account-admin-root:before {
+  background-image: url("../icons/bebebe/pencil.svg");
+}
+.toolbar-bar .toolbar-icon-account-admin-root:active:before {
+  background-image: url("../icons/ffffff/pencil.svg");
+}
+
+/* Tray styling (second row) */
+.toolbar-tray .toolbar-icon.toolbar-icon-account-admin-root:before {
+  background-image: url("../icons/787878/pencil.svg");
+}
+.toolbar-tray .toolbar-icon.toolbar-icon-account-admin-root:active:before {
+  background-image: url("../icons/000000/pencil.svg");
+}

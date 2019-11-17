@@ -149,7 +149,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 提现账户
     $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('所属账户'))
+      ->setLabel(t('Account'))
       ->setSetting('target_type', 'account')
       ->setDisplayOptions('view', [
         'label' => 'inline',
@@ -159,7 +159,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 提现金额
     $fields['amount'] = BaseFieldDefinition::create('commerce_price')
-      ->setLabel(t('提现金额'))
+      ->setLabel(t('Amount'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'commerce_price_default',
@@ -168,7 +168,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 转账方式
     $fields['transfer_method'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('提现方式'))
+      ->setLabel(t('Transfer method'))
       ->setSetting('target_type', 'account_transfer_method')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
@@ -179,8 +179,8 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 处理状态（待审核、正在处理、已拒绝、已完成）(使用状态机)
     $fields['state'] = BaseFieldDefinition::create('state')
-      ->setLabel(t('处理状态'))
-      ->setDescription(t('待审核、正在处理、已拒绝、已完成'))
+      ->setLabel(t('Process status'))
+      ->setDescription(t('draft/processing/completed/canceled'))
       ->setRequired(TRUE)
       ->setSetting('max_length', 255)
       ->setDisplayOptions('view', [
@@ -193,8 +193,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 处理人（审核人）
     $fields['auditor_user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('审核人'))
-      ->setDescription(t('对提现单进行审核和处理的用户。'))
+      ->setLabel(t('Auditor'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -207,7 +206,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 审核时间
     $fields['audit_time'] = BaseFieldDefinition::create('timestamp')
-      ->setLabel(t('审核时间'))
+      ->setLabel(t('Audit time'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'timestamp',
@@ -216,8 +215,8 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 转账交易号
     $fields['transaction_number'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('转账交易号'))
-      ->setDescription(t('外部系统转账所产生的交易号，如银行转账，支付宝转账的交易订单号。'))
+      ->setLabel(t('Transaction number'))
+      ->setDescription(t('The three-part transfer service system transaction number.'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'string',
@@ -230,8 +229,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 备注
     $fields['remarks'] = BaseFieldDefinition::create('string_long')
-      ->setLabel(t('备注'))
-      ->setDescription(t('此提现单的备注说明信息。'))
+      ->setLabel(t('Remarks'))
       ->setSettings([
         'max_length' => 250,
         'text_processing' => 0,
@@ -262,7 +260,7 @@ class Withdraw extends ContentEntityBase implements WithdrawInterface {
 
     // 申请时间
     $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('申请时间'))
+      ->setLabel(t('Created'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'timestamp',

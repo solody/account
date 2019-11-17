@@ -52,7 +52,7 @@ use Drupal\user\UserInterface;
  *   },
  *   field_ui_base_route = "account_transfer_method.settings",
  *   bundle_label = @Translation("Transfer method type"),
- *   bundle_plugin_type = "transfer_gateway"
+ *   bundle_plugin_type = "account_transfer_gateway"
  * )
  */
 class TransferMethod extends ContentEntityBase implements TransferMethodInterface {
@@ -158,7 +158,7 @@ class TransferMethod extends ContentEntityBase implements TransferMethodInterfac
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('所属用户'))
+      ->setLabel(t('Owner'))
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
@@ -167,7 +167,7 @@ class TransferMethod extends ContentEntityBase implements TransferMethodInterfac
       ]);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('提现方式名称'))
+      ->setLabel(t('Name'))
       ->setDefaultValue('')
       ->setDisplayOptions('view', [
         'label' => 'inline',

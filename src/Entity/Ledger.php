@@ -133,7 +133,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 所属账户
     $fields['account_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('所属账户'))
+      ->setLabel(t('Account'))
       ->setSetting('target_type', 'account')
       ->setDisplayOptions('view', [
         'label' => 'inline',
@@ -143,7 +143,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 记账类型（进/出）
     $fields['amount_type'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('记账类型'))
+      ->setLabel(t('Amount type'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'string',
@@ -152,7 +152,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 记账金额
     $fields['amount'] = BaseFieldDefinition::create('commerce_price')
-      ->setLabel(t('记账金额'))
+      ->setLabel(t('Amount'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'commerce_price_default',
@@ -161,7 +161,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 记账余额
     $fields['balance'] = BaseFieldDefinition::create('commerce_price')
-      ->setLabel(t('记账余额'))
+      ->setLabel(t('Balance'))
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'commerce_price_default',
@@ -170,7 +170,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 备注
     $fields['remarks'] = BaseFieldDefinition::create('string_long')
-      ->setLabel(t('备注'))
+      ->setLabel(t('Remarks'))
       ->setDefaultValue('')
       ->setDisplayOptions('view', [
         'label' => 'above',
@@ -179,7 +179,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
       ]);
 
     $fields['source'] = BaseFieldDefinition::create('dynamic_entity_reference')
-      ->setLabel(t('记账来源'))
+      ->setLabel(t('Accounting source'))
       ->setDisplayOptions('view', [
         'type' => 'dynamic_entity_reference_label'
       ]);
@@ -190,7 +190,7 @@ class Ledger extends ContentEntityBase implements LedgerInterface {
 
     // 发生时间
     $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('发生时间'))
+      ->setLabel(t('Created'))
       ->setDisplayOptions('view', [
         'label' => 'inline',
         'type' => 'timestamp',

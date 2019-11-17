@@ -4,7 +4,7 @@ dependencies:
   module:
     - account
 id: account_transfer_withdraw
-label: 转账
+label: Transfer
 type: withdraw
 plugin: account_transfer_withdraw
 configuration: {  }

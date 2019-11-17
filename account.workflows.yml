@@ -4,23 +4,23 @@ withdraw_default:
   label: 'Withdraw Default'
   states:
     draft:
-      label: 待审核
+      label: 'Draft'
     processing:
-      label: 正在处理
+      label: 'Processing'
     completed:
-      label: 已完成
+      label: 'Completed'
     canceled:
-      label: 已拒绝
+      label: 'Canceled'
   transitions:
     place:
-      label: '通过审核'
+      label: 'Place'
       from: [draft]
       to: processing
     transfer:
-      label: '完成打款'
+      label: 'Transfer'
       from: [processing]
       to: completed
     cancel:
-      label: '拒绝申请'
+      label: 'Cancel'
       from: [draft]
       to:   canceled
